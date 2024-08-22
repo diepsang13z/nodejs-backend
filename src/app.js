@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
 
+const router = require('./routes');
 const { checkOverload } = require('./helpers/check.connect');
 
 const app = express();
@@ -16,18 +17,19 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
 
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    entended: true,
+  }),
+);
+
 // init db
 require('./dbs/init.mongodb');
-checkOverload();
+// checkOverload();
 
 // init router
-app.get('/', (req, res, next) => {
-  const str = '123';
-  return res.status(200).json({
-    message: 132,
-    metadata: str.repeat(1000),
-  });
-});
+app.use('/', router);
 
 // handle error
 
