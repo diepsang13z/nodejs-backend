@@ -3,8 +3,10 @@
 const express = require('express');
 const router = express.Router();
 
+const { asyncHandler } = require('../../middlewares/requestHandler.middleware');
 const accessController = require('../../controllers/access.controller');
 
-router.post('/shop/signup', accessController.signUp);
+// url mapping
+router.post('/shop/signup', asyncHandler(accessController.signUp));
 
 module.exports = router;

@@ -10,6 +10,11 @@ const compression = require('compression');
 const router = require('./routes');
 const { checkOverload } = require('./helpers/check.connect');
 
+const {
+  notFoundHandler,
+  errorHandler,
+} = require('./middlewares/errorHandler.middleware');
+
 const app = express();
 
 // init middlewares
@@ -32,5 +37,7 @@ require('./dbs/init.mongodb');
 app.use('/', router);
 
 // handle error
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 module.exports = app;

@@ -1,7 +1,12 @@
 'use strict';
 
 const { hash } = require('bcrypt');
-const { randomBytes, createPublicKey } = require('node:crypto');
+const { randomBytes } = require('node:crypto');
+
+const {
+  BadRequestError,
+  InternalServerError,
+} = require('../core/error.response');
 
 const shopModel = require('../models/shop.model');
 const KeyTokenService = require('./keyToken.service');
@@ -17,73 +22,54 @@ const RoleShop = {
 
 class AccessService {
   static signUp = async ({ name, email, password }) => {
-    try {
-      const shopHolder = await shopModel.findOne({ email }).lean();
+    const shopHolder = await shopModel.findOne({ email }).lean();
 
-      if (shopHolder) {
-        return {
-          code: '2003',
-          message: 'shop already registered!',
-        };
-      }
-
-      const passwordHash = await hash(password, 10);
-      const newShope = await shopModel.create({
-        name,
-        email,
-        password: passwordHash,
-        roles: [RoleShop.SHOP],
-      });
-
-      if (newShope) {
-        // generate publicKey and privateKey
-        const privateKey = randomBytes(64).toString('hex');
-        const publicKey = randomBytes(64).toString('hex');
-
-        const keyStore = await KeyTokenService.createKeyToken({
-          userId: newShope._id,
-          publicKey,
-          privateKey,
-        });
-
-        if (!keyStore) {
-          return {
-            code: '5011',
-            message: 'keyStore error!',
-          };
-        }
-
-        const tokens = await createTokenPair(
-          { userId: newShope._id, email },
-          publicKey,
-          privateKey,
-        );
-        console.log(`Created Tokens Success::`, tokens);
-
-        return {
-          code: 201,
-          metadata: {
-            shop: getInfoData({
-              fields: ['_id', 'name', 'email'],
-              object: newShope,
-            }),
-            tokens,
-          },
-        };
-      }
-
-      return {
-        code: 200,
-        metadata: null,
-      };
-    } catch (error) {
-      console.log(error);
-      return {
-        code: '5001',
-        message: error.message,
-        status: 'error',
-      };
+    if (shopHolder) {
+      throw new BadRequestError('Shop already registered!');
     }
+
+    const passwordHash = await hash(password, 10);
+    const newShop = await shopModel.create({
+      name,
+      email,
+      password: passwordHash,
+      roles: [RoleShop.SHOP],
+    });
+
+    if (!newShop) {
+      throw new InternalServerError('Failed to create new shop!');
+    }
+
+    const privateKey = randomBytes(64).toString('hex');
+    const publicKey = randomBytes(64).toString('hex');
+
+    const keyStore = await KeyTokenService.createKeyToken({
+      userId: newShop._id,
+      publicKey,
+      privateKey,
+    });
+
+    if (!keyStore) {
+      throw new InternalServerError('Failed to store key!');
+    }
+
+    const tokens = await createTokenPair(
+      { userId: newShop._id, email },
+      publicKey,
+      privateKey,
+    );
+    console.log(`Created Tokens Success::`, tokens);
+
+    return {
+      code: '20011',
+      metadata: {
+        shop: getInfoData({
+          fields: ['_id', 'name', 'email'],
+          object: newShop,
+        }),
+        tokens,
+      },
+    };
   };
 }
 
