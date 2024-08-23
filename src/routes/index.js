@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { apiKey, permission } = require('../auth/checkAuth');
+const { apiKey, permission } = require('../auth/check.auth');
 
 const accessRouter = require('./access');
 

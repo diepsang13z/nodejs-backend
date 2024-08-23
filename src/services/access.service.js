@@ -11,7 +11,7 @@ const {
 
 const shopModel = require('../models/shop.model');
 const KeyTokenService = require('./keyToken.service');
-const { createTokenPair } = require('../auth/authUtils');
+const { createTokenPair } = require('../auth/utils.auth');
 const { getInfoData } = require('../utils');
 
 const { findByEmail } = require('./shop.service');
