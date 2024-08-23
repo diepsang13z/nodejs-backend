@@ -7,11 +7,11 @@ const { apiKey, permission } = require('../auth/check.auth');
 
 const accessRouter = require('./access');
 
-// check APIKey
+// Check APIKey
 router.use(apiKey);
 router.use(permission('0000'));
 
-// router mapping
+// Router Mapping
 router.use('/v1/api', accessRouter);
 
 module.exports = router;

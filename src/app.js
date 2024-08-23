@@ -17,7 +17,7 @@ const {
 
 const app = express();
 
-// init middlewares
+// Init middlewares
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
@@ -29,14 +29,14 @@ app.use(
   }),
 );
 
-// init db
+// Init DBs
 require('./dbs/init.mongodb');
 // checkOverload();
 
-// init router
+// Init router
 app.use('/', router);
 
-// handle error
+// Handle Error
 app.use(notFoundHandler);
 app.use(errorHandler);
 
