@@ -13,7 +13,7 @@ const notFoundHandler = (req, res, next) => {
 
 const errorHandler = (err, req, res, next) => {
   if (!(err instanceof ErrorResponse)) {
-    err = new InternalServerError();
+    err = new InternalServerError(err.message);
   }
 
   const statusCode = err.status;
