@@ -2,14 +2,10 @@
 
 const { BadRequestError } = require('../core/error.response');
 const { findById } = require('../services/apiKey.service');
-
-const HEADER = {
-  API_KEY: 'x-api-key',
-  AUTHORIZATION: 'authorization',
-};
+const { API_KEY } = require('./header.auth');
 
 const apiKey = async (req, res, next) => {
-  const key = req.headers[HEADER.API_KEY]?.toString();
+  const key = req.headers[API_KEY]?.toString();
   if (!key) {
     next(new BadRequestError('APIKey is required!'));
   }
