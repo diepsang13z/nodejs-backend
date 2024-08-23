@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { asyncHandler } = require('../../middlewares/requestHandler.middleware');
+const { asyncHandler } = require('../../helpers/handler.helper');
 const accessController = require('../../controllers/access.controller');
 
 // url mapping
