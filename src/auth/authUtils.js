@@ -8,7 +8,7 @@ const createTokenPair = async (payload, publicKey, privateKey) => {
       expiresIn: '2 days',
     });
 
-    const refeshToken = await JWT.sign(payload, privateKey, {
+    const refreshToken = await JWT.sign(payload, privateKey, {
       expiresIn: '7 days',
     });
 
@@ -20,7 +20,7 @@ const createTokenPair = async (payload, publicKey, privateKey) => {
       }
     });
 
-    return { accessToken, refeshToken };
+    return { accessToken, refreshToken };
   } catch (error) {
     return error;
   }

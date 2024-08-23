@@ -1,17 +1,20 @@
 'use strict';
 
-const { hash } = require('bcrypt');
+const { hash, compare } = require('bcrypt');
 const { randomBytes } = require('node:crypto');
 
 const {
   BadRequestError,
   InternalServerError,
+  UnauthorizedError,
 } = require('../core/error.response');
 
 const shopModel = require('../models/shop.model');
 const KeyTokenService = require('./keyToken.service');
 const { createTokenPair } = require('../auth/authUtils');
 const { getInfoData } = require('../utils');
+
+const { findByEmail } = require('./shop.service');
 
 const RoleShop = {
   SHOP: 'SHOP',
@@ -43,16 +46,6 @@ class AccessService {
     const privateKey = randomBytes(64).toString('hex');
     const publicKey = randomBytes(64).toString('hex');
 
-    const keyStore = await KeyTokenService.createKeyToken({
-      userId: newShop._id,
-      publicKey,
-      privateKey,
-    });
-
-    if (!keyStore) {
-      throw new InternalServerError('Failed to store key!');
-    }
-
     const tokens = await createTokenPair(
       { userId: newShop._id, email },
       publicKey,
@@ -60,15 +53,65 @@ class AccessService {
     );
     console.log(`Created Tokens Success::`, tokens);
 
+    const keyStore = await KeyTokenService.createKeyToken({
+      userId: newShop._id,
+      publicKey,
+      privateKey,
+      refreshToken: tokens.refreshToken,
+    });
+
+    if (!keyStore) {
+      throw new InternalServerError('Failed to store key!');
+    }
+
     return {
-      code: '20011',
-      metadata: {
-        shop: getInfoData({
-          fields: ['_id', 'name', 'email'],
-          object: newShop,
-        }),
-        tokens,
-      },
+      shop: getInfoData({
+        fields: ['_id', 'name', 'email'],
+        object: newShop,
+      }),
+      tokens,
+    };
+  };
+
+  static login = async ({ email, password, refreshToken = null }) => {
+    const shop = await findByEmail({ email });
+    if (!shop) {
+      throw new BadRequestError('Shop not registered!');
+    }
+
+    const match = compare(password, shop.password);
+    if (!match) {
+      throw new UnauthorizedError('Authentication failed!');
+    }
+
+    const privateKey = randomBytes(64).toString('hex');
+    const publicKey = randomBytes(64).toString('hex');
+
+    const tokens = await createTokenPair(
+      { userId: shop._id, email },
+      publicKey,
+      privateKey,
+    );
+    console.log(tokens);
+    console.log(tokens.refreshToken);
+
+    const keyStore = await KeyTokenService.createKeyToken({
+      userId: shop._id,
+      publicKey,
+      privateKey,
+      refreshToken: tokens.refreshToken,
+    });
+
+    if (!keyStore) {
+      throw new InternalServerError('Failed to store key!');
+    }
+
+    return {
+      shop: getInfoData({
+        fields: ['_id', 'name', 'email'],
+        object: shop,
+      }),
+      tokens,
     };
   };
 }

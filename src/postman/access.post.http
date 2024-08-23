@@ -1,13 +1,21 @@
 @url_dev=http://localhost:8000
 
-POST {{url_dev}}/v1/api/shop/signUp
+# POST {{url_dev}}/v1/api/shop/signUp
+# Content-Type: application/json
+# x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+
+# {
+#     "name": "diepsang",
+#     "email": "blue@gmail.com",
+#     "password": "123"
+# }
+
+POST {{url_dev}}/v1/api/shop/login
 Content-Type: application/json
 x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
 
 {
-    "name": "diepsang",
-    "email": "blue2@gmail.com",
+    "email": "blue@gmail.com",
     "password": "123"
 }
-
 
