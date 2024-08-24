@@ -12,6 +12,11 @@ const notFoundHandler = (req, res, next) => {
 };
 
 const errorHandler = (err, req, res, next) => {
+  const DEBUG = 1;
+  if (DEBUG === 1) {
+    console.log(err);
+  }
+
   if (!(err instanceof ErrorResponse)) {
     err = new InternalServerError(err.message);
   }
