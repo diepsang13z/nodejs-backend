@@ -57,7 +57,7 @@ const authentication = async (req, res, next) => {
     req.keyStore = keyStore;
     return next();
   } catch (error) {
-    throw InternalServerError(error.message);
+    throw new InternalServerError(error.message);
   }
 };
 
