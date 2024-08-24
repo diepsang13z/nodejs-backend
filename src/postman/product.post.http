@@ -1,0 +1,23 @@
+@url_dev=http://localhost:8000
+
+### Create new Product API
+POST {{url_dev}}/v1/api/product
+Content-Type: application/json
+x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+x-client-id: 66c9b818ed301b3355940c97
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1MDE5OTUsImV4cCI6MTcyNDY3NDc5NX0.nVuY26FmeLB8wF9CFyEtWgW3rxrieuHOEaetYxJ_OGY
+
+{
+    "product_name": "New Jeans",
+    "product_desc": "High-quality denim jeans",
+    "product_thumb": "Thumb-Link",
+    "product_price": 50,
+    "product_quantity": 5,
+    "product_type": "Clothing",
+    "product_shop": "66c9b818ed301b3355940c97",
+    "product_attributes": {
+        "brand": "_blue",
+        "size": "XL",
+        "material": "Denim"
+    }
+}
