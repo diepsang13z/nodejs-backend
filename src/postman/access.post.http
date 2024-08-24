@@ -1,27 +1,40 @@
 @url_dev=http://localhost:8000
 
-# POST {{url_dev}}/v1/api/shop/signUp
-# Content-Type: application/json
-# x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+### Sign up API
+POST {{url_dev}}/v1/api/shop/signUp
+Content-Type: application/json
+x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
 
-# {
-#     "name": "diepsang",
-#     "email": "blue@gmail.com",
-#     "password": "123"
-# }
+{
+    "name": "diepsang",
+    "email": "blue@gmail.com",
+    "password": "123"
+}
 
-# POST {{url_dev}}/v1/api/shop/login
-# Content-Type: application/json
-# x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+### Login API
+POST {{url_dev}}/v1/api/shop/login
+Content-Type: application/json
+x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
 
-# {
-#     "email": "blue@gmail.com",
-#     "password": "123"
-# }
+{
+    "email": "blue@gmail.com",
+    "password": "123"
+}
 
+### Handle refresh token API
+POST {{url_dev}}/v1/api/shop/handleRefreshToken
+Content-Type: application/json
+x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+x-client-id: 66c8b1d1904be3f461216578
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM4YjFkMTkwNGJlM2Y0NjEyMTY1NzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0NDk1MjkzLCJleHAiOjE3MjQ2NjgwOTN9.1GfNlm7OFvfFJcklTWXZxrqrlh7tIzb6XGEXRR3Eo1g
 
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM4YjFkMTkwNGJlM2Y0NjEyMTY1NzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0NDk1MjkzLCJleHAiOjE3MjUxMDAwOTN9.OV3U9vGabU-DtSSuAA6SjdnvD9X_IhxK2cKIvoyk3ok"
+}
+
+### Logout API
 POST {{url_dev}}/v1/api/shop/logout
 Content-Type: application/json
 x-api-key: 529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
 x-client-id: 66c8b1d1904be3f461216578
-authorization: esyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM4YjFkMTkwNGJlM2Y0NjEyMTY1NzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0NDQ5MzI2LCJleHAiOjE3MjQ2MjIxMjZ9.D0YEx8SiHCSSMuRRv3NMMKJqaMPzQ46WdUSyhQ1IHYI
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM4YjFkMTkwNGJlM2Y0NjEyMTY1NzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0NDk1MjkzLCJleHAiOjE3MjQ2NjgwOTN9.1GfNlm7OFvfFJcklTWXZxrqrlh7tIzb6XGEXRR3Eo1g

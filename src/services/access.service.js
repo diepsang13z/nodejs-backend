@@ -10,10 +10,10 @@ const {
 } = require('../core/error.response');
 
 const shopModel = require('../models/shop.model');
-const KeyTokenService = require('./keyToken.service');
-const { createTokenPair } = require('../auth/utils.auth');
+const { createTokenPair, verifyJWT } = require('../auth/utils.auth');
 const { getInfoData } = require('../utils');
 
+const KeyTokenService = require('./keyToken.service');
 const { findByEmail } = require('./shop.service');
 
 const RoleShop = {
@@ -118,6 +118,59 @@ class AccessService {
   static logout = async ({ keyStore }) => {
     const delKey = await KeyTokenService.removeKeyById(keyStore._id);
     return delKey;
+  };
+
+  static handleRefreshToken = async ({ refreshToken }) => {
+    const usedToken = await KeyTokenService.findByRefreshTokenUsed(
+      refreshToken,
+    );
+
+    if (usedToken) {
+      const { userId, email } = await verifyJWT(
+        refreshToken,
+        usedToken.privateKey,
+      );
+      console.log(`Wrong user::`, { userId, email });
+
+      await KeyTokenService.removeKeyByUserId(userId);
+      throw new BadRequestError('Something wrong happend, Pls relogin!');
+    }
+
+    const keyStore = await KeyTokenService.getByRefreshToken(refreshToken);
+    if (!keyStore) {
+      throw new UnauthorizedError('Shop not registered!');
+    }
+
+    const { userId, email } = await verifyJWT(
+      refreshToken,
+      keyStore.privateKey,
+    );
+
+    const shop = await findByEmail({ email });
+    if (!shop) {
+      throw new UnauthorizedError('Shop not registered!');
+    }
+    console.log(`Valid user::`, { userId, email });
+
+    const newTokens = await createTokenPair(
+      { userId, email },
+      keyStore.publicKey,
+      keyStore.privateKey,
+    );
+
+    await keyStore.updateOne({
+      $set: {
+        refreshToken: newTokens.refreshToken,
+      },
+      $addToSet: {
+        refreshTokensUsed: refreshToken,
+      },
+    });
+
+    return {
+      user: { userId, email },
+      newTokens,
+    };
   };
 }
 
