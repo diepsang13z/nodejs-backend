@@ -4,7 +4,7 @@ const { BadRequestError } = require('../core/error.response');
 const { findById } = require('../services/apiKey.service');
 const { API_KEY } = require('./header.auth');
 
-const apiKey = async (req, res, next) => {
+const checkAPIKey = async (req, res, next) => {
   const key = req.headers[API_KEY]?.toString();
   if (!key) {
     next(new BadRequestError('APIKey is required!'));
@@ -20,7 +20,7 @@ const apiKey = async (req, res, next) => {
   return next();
 };
 
-const permission = (permission) => {
+const checkPermission = (permission) => {
   return (req, res, next) => {
     if (!req.objKey.permissions) {
       next(new BadRequestError('Permission denied!'));
@@ -37,6 +37,6 @@ const permission = (permission) => {
 };
 
 module.exports = {
-  apiKey,
-  permission,
+  checkAPIKey,
+  checkPermission,
 };
