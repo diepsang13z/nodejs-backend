@@ -1,8 +1,10 @@
 'use strict';
 
 const { BadRequestError } = require('../core/error.response');
-const { findById } = require('../services/apiKey.service');
+
 const { API_KEY } = require('./header.auth');
+
+const APIKeyService = require('../services/apiKey.service');
 
 const checkAPIKey = async (req, res, next) => {
   const key = req.headers[API_KEY]?.toString();
@@ -11,7 +13,7 @@ const checkAPIKey = async (req, res, next) => {
   }
 
   // check apiKey
-  const objKey = await findById(key);
+  const objKey = await APIKeyService.findById(key);
   if (!objKey) {
     next(new BadRequestError('Invalid APIKey!'));
   }

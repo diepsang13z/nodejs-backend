@@ -1,10 +1,12 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const { countConnect } = require('../helpers/check.connect');
+
 const {
   db: { url },
 } = require('../configs/index');
+
+const { countConnect } = require('../helpers/check.connect');
 
 const connectString = url;
 

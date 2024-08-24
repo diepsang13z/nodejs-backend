@@ -1,7 +1,7 @@
 'use strict';
 
-const { hash, compare } = require('bcrypt');
-const { randomBytes } = require('node:crypto');
+const bcrypt = require('bcrypt');
+const crypto = require('node:crypto');
 
 const {
   BadRequestError,
@@ -14,7 +14,7 @@ const { createTokenPair, verifyJWT } = require('../auth/utils.auth');
 const { getInfoData } = require('../utils');
 
 const KeyTokenService = require('./keyToken.service');
-const { findByEmail } = require('./shop.service');
+const ShopService = require('./shop.service');
 
 const RoleShop = {
   SHOP: 'SHOP',
@@ -31,7 +31,7 @@ class AccessService {
       throw new BadRequestError('Shop already registered!');
     }
 
-    const passwordHash = await hash(password, 10);
+    const passwordHash = await bcrypt.hash(password, 10);
     const newShop = await shopModel.create({
       name,
       email,
@@ -43,8 +43,8 @@ class AccessService {
       throw new InternalServerError('Failed to create new shop!');
     }
 
-    const privateKey = randomBytes(64).toString('hex');
-    const publicKey = randomBytes(64).toString('hex');
+    const privateKey = crypto.randomBytes(64).toString('hex');
+    const publicKey = crypto.randomBytes(64).toString('hex');
 
     const tokens = await createTokenPair(
       { userId: newShop._id, email },
@@ -74,18 +74,18 @@ class AccessService {
   };
 
   static login = async ({ email, password, refreshToken = null }) => {
-    const shop = await findByEmail({ email });
+    const shop = await ShopService.findByEmail({ email });
     if (!shop) {
       throw new BadRequestError('Shop not registered!');
     }
 
-    const match = compare(password, shop.password);
+    const match = bcrypt.compare(password, shop.password);
     if (!match) {
       throw new UnauthorizedError('Authentication failed!');
     }
 
-    const privateKey = randomBytes(64).toString('hex');
-    const publicKey = randomBytes(64).toString('hex');
+    const privateKey = crypto.randomBytes(64).toString('hex');
+    const publicKey = crypto.randomBytes(64).toString('hex');
 
     const tokens = await createTokenPair(
       { userId: shop._id, email },
@@ -146,7 +146,7 @@ class AccessService {
       keyStore.privateKey,
     );
 
-    const shop = await findByEmail({ email });
+    const shop = await ShopService.findByEmail({ email });
     if (!shop) {
       throw new UnauthorizedError('Shop not registered!');
     }
