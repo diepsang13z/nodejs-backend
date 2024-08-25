@@ -56,12 +56,12 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "Test Clothing",
-    "product_desc": "New Clothing",
-    "product_thumb": "Thumb-Link-Clothing",
+    "product_name": "Test Furniture",
+    "product_desc": "New Funiture",
+    "product_thumb": "Thumb-Link-Funiture",
     "product_price": 800,
     "product_quantity": 7,
-    "product_type": "abc",
+    "product_type": "Furniture",
     "product_attributes": {
         "brand": "Test",
         "size": "Test",

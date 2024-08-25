@@ -2,7 +2,7 @@
 
 const { BadRequestError } = require('../core/error.response');
 
-const { Clothing, Electronic } = require('./product');
+const { Clothing, Electronic, Furniture } = require('./product');
 
 // Factory pattern
 class ProductFactory {
@@ -24,5 +24,6 @@ class ProductFactory {
 // Register product type
 ProductFactory.registerProductType('Clothing', Clothing);
 ProductFactory.registerProductType('Electronic', Electronic);
+ProductFactory.registerProductType('Furniture', Furniture);
 
 module.exports = ProductFactory;
