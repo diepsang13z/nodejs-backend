@@ -1,5 +1,6 @@
 'use strict';
 
+const { InternalServerError } = require('../core/error.response');
 const keyTokenModel = require('../models/keyToken.model');
 
 class KeyTokenService {
@@ -36,6 +37,22 @@ class KeyTokenService {
   static findByRefreshTokenUsed = async (refreshToken) => {
     return await keyTokenModel
       .findOne({ refreshTokensUsed: refreshToken })
+      .lean();
+  };
+
+  static updateRefreshToken = async (keyStoreId, newRefreshToken) => {
+    return await keyTokenModel
+      .findOneAndUpdate(
+        { _id: keyStoreId },
+        {
+          $set: {
+            refreshToken: newRefreshToken,
+          },
+          $addToSet: {
+            refreshTokensUsed: '$refreshToken',
+          },
+        },
+      )
       .lean();
   };
 

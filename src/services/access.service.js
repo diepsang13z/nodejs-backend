@@ -10,7 +10,7 @@ const {
 } = require('../core/error.response');
 
 const shopModel = require('../models/shop.model');
-const { createTokenPair, verifyJWT } = require('../auth/utils.auth');
+const { createTokenPair } = require('../auth/utils.auth');
 const { getInfoData } = require('../utils');
 
 const KeyTokenService = require('./keyToken.service');
@@ -120,52 +120,39 @@ class AccessService {
     return delKey;
   };
 
-  static handleRefreshToken = async ({ refreshToken }) => {
-    const usedToken = await KeyTokenService.findByRefreshTokenUsed(
-      refreshToken,
-    );
+  static handleRefreshToken = async ({ refreshToken, user, keyStore }) => {
+    const { userId, email } = user;
 
-    if (usedToken) {
-      const { userId, email } = await verifyJWT(
-        refreshToken,
-        usedToken.privateKey,
-      );
-      console.log(`Wrong user::`, { userId, email });
-
+    if (keyStore.refreshTokensUsed.includes(refreshToken)) {
       await KeyTokenService.removeKeyByUserId(userId);
       throw new BadRequestError('Something wrong happend, Pls relogin!');
     }
 
-    const keyStore = await KeyTokenService.getByRefreshToken(refreshToken);
-    if (!keyStore) {
+    if (keyStore.refreshToken != refreshToken) {
       throw new UnauthorizedError('Shop not registered!');
     }
-
-    const { userId, email } = await verifyJWT(
-      refreshToken,
-      keyStore.privateKey,
-    );
 
     const shop = await ShopService.findByEmail({ email });
     if (!shop) {
       throw new UnauthorizedError('Shop not registered!');
     }
-    console.log(`Valid user::`, { userId, email });
 
     const newTokens = await createTokenPair(
       { userId, email },
       keyStore.publicKey,
       keyStore.privateKey,
     );
+    if (!newTokens) {
+      throw new InternalServerError('Create new Tokens Faild!');
+    }
 
-    await keyStore.updateOne({
-      $set: {
-        refreshToken: newTokens.refreshToken,
-      },
-      $addToSet: {
-        refreshTokensUsed: refreshToken,
-      },
-    });
+    const updatedKeyStore = await KeyTokenService.updateRefreshToken(
+      keyStore._id,
+      newTokens.refreshToken,
+    );
+    if (!updatedKeyStore) {
+      throw new InternalServerError('Update Refresh Token Faild!');
+    }
 
     return {
       user: { userId, email },

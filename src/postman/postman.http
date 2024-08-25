@@ -1,0 +1,71 @@
+@url_dev=http://localhost:8000
+
+@apiKey=529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+
+@clientId=66c9b818ed301b3355940c97
+
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTY3NzYsImV4cCI6MTcyNDc2OTU3Nn0.xtduIC2T6MOpFTgvDD2jZLjsB2RIlMN_SNbYEy9k54g
+
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTY3NzYsImV4cCI6MTcyNTIwMTU3Nn0.ZRfPqUp6WbkP8Sf6qYGI5gt_1XylKVlygYi8j70siJ8
+
+### Sign up API
+POST {{url_dev}}/v1/api/shop/signUp
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+    "name": "diepsang",
+    "email": "bluefd@gmail.com",
+    "password": "123"
+}
+
+### Login API
+POST {{url_dev}}/v1/api/shop/login
+Content-Type: application/json
+x-api-key: {{apiKey}}
+
+{
+    "email": "blue05@gmail.com",
+    "password": "123"
+}
+
+### Handle refresh token API
+POST {{url_dev}}/v1/api/shop/handleRefreshToken
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+x-rtoken-id: {{refreshToken}}
+
+{
+    "refreshToken": "{{refreshToken}}"
+}
+
+### Logout API
+POST {{url_dev}}/v1/api/shop/logout
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Create new Product API
+POST {{url_dev}}/v1/api/product
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "product_name": "New Jeans",
+    "product_desc": "High-quality denim jeans",
+    "product_thumb": "Thumb-Link",
+    "product_price": 50,
+    "product_quantity": 5,
+    "product_type": "Clothing",
+    "product_shop": "66c9b818ed301b3355940c97",
+    "product_attributes": {
+        "brand": "_blue",
+        "size": "XL",
+        "material": "Denim"
+    }
+}
