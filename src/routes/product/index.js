@@ -11,8 +11,21 @@ const { verifyAccessToken } = require('../../auth/verify.auth');
 router.use(asyncHandler(verifyAccessToken));
 router.post('', asyncHandler(productController.createProduct));
 
+router.put(
+  '/publish/:id',
+  asyncHandler(productController.publishProductForShop),
+);
+router.put(
+  '/unpublish/:id',
+  asyncHandler(productController.unPublishProductForShop),
+);
+
 // Query
-router.get('/drafts/all', asyncHandler(productController.getAllDraftForShop));
+router.get('/drafts', asyncHandler(productController.getDraftProductInShop));
+router.get(
+  '/published',
+  asyncHandler(productController.getPublishProductInShop),
+);
 // End Query
 
 module.exports = router;

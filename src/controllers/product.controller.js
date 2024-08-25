@@ -19,19 +19,50 @@ class ProductController {
     }).send(res);
   };
 
-  // Query
+  // Modify
+  publishProductForShop = async (req, res, next) => {
+    const { userId } = req.user;
+    const product_id = req.params.id;
 
-  /**
-   * @desc Get all Drafts Product for Shop
-   * @param { Number } limit
-   * @param { Number } skip
-   * @return { JSON }
-   */
-  getAllDraftForShop = async (req, res, next) => {
+    new OK({
+      message: 'Publish Product success!',
+      metadata: await ProductService.publishProductForShop({
+        product_shop: userId,
+        product_id: product_id,
+      }),
+    }).send(res);
+  };
+
+  unPublishProductForShop = async (req, res, next) => {
+    const { userId } = req.user;
+    const product_id = req.params.id;
+
+    new OK({
+      message: 'Publish Product success!',
+      metadata: await ProductService.unPublishProductForShop({
+        product_shop: userId,
+        product_id: product_id,
+      }),
+    }).send(res);
+  };
+  // End Modify
+
+  // Query
+  getDraftProductInShop = async (req, res, next) => {
     const { userId } = req.user;
     new OK({
       message: 'Get list Product!',
-      metadata: await ProductService.findAllDraftsForShop({
+      metadata: await ProductService.findDraftsInShop({
+        product_shop: userId,
+      }),
+    }).send(res);
+  };
+
+  getPublishProductInShop = async (req, res, next) => {
+    const { userId } = req.user;
+    new OK({
+      message: 'Get list Product!',
+      metadata: await ProductService.findPublishInShop({
         product_shop: userId,
       }),
     }).send(res);

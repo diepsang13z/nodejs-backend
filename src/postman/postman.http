@@ -47,7 +47,6 @@ x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
-
 ### Create new Product
 POST {{url_dev}}/v1/api/product
 Content-Type: application/json
@@ -69,8 +68,29 @@ authorization: {{accessToken}}
     }
 }
 
-### Get Draft Products for Shop
-GET {{url_dev}}/v1/api/product/drafts/all
+### Get Draft Products in Shop
+GET {{url_dev}}/v1/api/product/drafts
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+### Publish Products for Shop
+PUT {{url_dev}}/v1/api/product/publish/66cb7f56cea9e55b27891d0f
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+### Get Publised Products in Shop
+GET {{url_dev}}/v1/api/product/published
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+### UnPublish Products for Shop
+PUT {{url_dev}}/v1/api/product/unpublish/66cb7f56cea9e55b27891d0f
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
