@@ -13,6 +13,31 @@ const queryProduct = async ({ query, limit, skip }) => {
     .exec();
 };
 
+const searchProductByUser = async ({ keySearch }) => {
+  // Full text search MongoDB
+  const regexSearch = new RegExp(keySearch);
+  return await productModel
+    .find(
+      {
+        isPublished: true,
+        $text: {
+          $search: regexSearch,
+        },
+      },
+      {
+        score: {
+          $meta: 'textScore',
+        },
+      },
+    )
+    .sort({
+      score: {
+        $meta: 'textScore',
+      },
+    })
+    .lean();
+};
+
 const publishProductForShop = async ({ product_shop, product_id }) => {
   const shop = await productModel.findOne({
     product_shop: product_shop,
@@ -51,4 +76,5 @@ module.exports = {
   queryProduct,
   publishProductForShop,
   unPublishProductForShop,
+  searchProductByUser,
 };

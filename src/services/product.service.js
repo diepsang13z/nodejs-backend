@@ -7,6 +7,7 @@ const {
   queryProduct,
   publishProductForShop,
   unPublishProductForShop,
+  searchProductByUser,
 } = require('../models/repositories/product.repo');
 
 // Factory pattern
@@ -46,6 +47,10 @@ class ProductFactory {
     return await unPublishProductForShop({ product_shop, product_id });
   };
   // End Modify
+
+  static searchProduct = async ({ keySearch }) => {
+    return await searchProductByUser({ keySearch });
+  };
 }
 
 // Register product type

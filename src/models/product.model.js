@@ -2,6 +2,7 @@
 
 const { model, Schema } = require('mongoose');
 const slugify = require('slugify');
+const product = require('../services/product');
 
 const DOCUMENT_NAME = {
   product: 'Product',
@@ -80,6 +81,9 @@ const productSchema = new Schema(
     collection: COLLECTION_NAME.product,
   },
 );
+
+// Create index for search:
+productSchema.index({ product_name: 'text', product_desc: 'text' }); // For full text search MongoDB
 
 // Document middleware: runs before .save() and .create() ...
 productSchema.pre('save', function (next) {

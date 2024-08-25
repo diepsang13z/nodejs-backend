@@ -8,6 +8,7 @@
 
 @refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTgzODYsImV4cCI6MTcyNTIwMzE4Nn0.bfmf4FI4ZlW8Jw0lQIkhJA1lzX12Ntfy2mX0-dj_lf4
 
+
 ### Sign Up
 POST {{url_dev}}/v1/api/shop/signUp
 Content-Type: application/json
@@ -19,6 +20,7 @@ x-api-key: {{apiKey}}
     "password": "123"
 }
 
+
 ### Login
 POST {{url_dev}}/v1/api/shop/login
 Content-Type: application/json
@@ -28,6 +30,7 @@ x-api-key: {{apiKey}}
     "email": "blue05@gmail.com",
     "password": "123"
 }
+
 
 ### Handle Refresh Token
 POST {{url_dev}}/v1/api/shop/handleRefreshToken
@@ -40,12 +43,14 @@ x-rtoken-id: {{refreshToken}}
     "refreshToken": "{{refreshToken}}"
 }
 
+
 ### Logout
 POST {{url_dev}}/v1/api/shop/logout
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
+
 
 ### Create new Product
 POST {{url_dev}}/v1/api/product
@@ -68,6 +73,7 @@ authorization: {{accessToken}}
     }
 }
 
+
 ### Get Draft Products in Shop
 GET {{url_dev}}/v1/api/product/drafts
 Content-Type: application/json
@@ -75,12 +81,22 @@ x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
+
 ### Publish Products for Shop
-PUT {{url_dev}}/v1/api/product/publish/66cb7f56cea9e55b27891d0f
+PUT {{url_dev}}/v1/api/product/publish/66cb7fa3c0250403db8e316f
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
+
+
+### UnPublish Products for Shop
+PUT {{url_dev}}/v1/api/product/unpublish/66cb7fa3c0250403db8e316f
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
 
 ### Get Publised Products in Shop
 GET {{url_dev}}/v1/api/product/published
@@ -89,9 +105,8 @@ x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
-### UnPublish Products for Shop
-PUT {{url_dev}}/v1/api/product/unpublish/66cb7f56cea9e55b27891d0f
+
+### Get list searhc Products for Shop
+GET {{url_dev}}/v1/api/product/search/bang quan
 Content-Type: application/json
 x-api-key: {{apiKey}}
-x-client-id: {{clientId}}
-authorization: {{accessToken}}

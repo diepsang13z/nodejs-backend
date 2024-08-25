@@ -50,6 +50,7 @@ class ProductController {
   // Query
   getDraftProductInShop = async (req, res, next) => {
     const { userId } = req.user;
+
     new OK({
       message: 'Get list Product!',
       metadata: await ProductService.findDraftsInShop({
@@ -60,6 +61,7 @@ class ProductController {
 
   getPublishProductInShop = async (req, res, next) => {
     const { userId } = req.user;
+
     new OK({
       message: 'Get list Product!',
       metadata: await ProductService.findPublishInShop({
@@ -69,6 +71,15 @@ class ProductController {
   };
 
   // End Query
+
+  getListSearchProduct = async (req, res, next) => {
+    const keySearch = req.params.keySearch;
+
+    new OK({
+      message: 'Get list Product!',
+      metadata: await ProductService.searchProduct({ keySearch }),
+    }).send(res);
+  };
 }
 
 module.exports = new ProductController();
