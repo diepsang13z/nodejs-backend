@@ -4,9 +4,9 @@
 
 @clientId=66c9b818ed301b3355940c97
 
-@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTY3NzYsImV4cCI6MTcyNDc2OTU3Nn0.xtduIC2T6MOpFTgvDD2jZLjsB2RIlMN_SNbYEy9k54g
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTgzODYsImV4cCI6MTcyNDc3MTE4Nn0.Eu5zHyLvadhi75yd4eR-e5suZj3FKC35Dz87qKNt9Jw
 
-@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTY3NzYsImV4cCI6MTcyNTIwMTU3Nn0.ZRfPqUp6WbkP8Sf6qYGI5gt_1XylKVlygYi8j70siJ8
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTgzODYsImV4cCI6MTcyNTIwMzE4Nn0.bfmf4FI4ZlW8Jw0lQIkhJA1lzX12Ntfy2mX0-dj_lf4
 
 ### Sign up API
 POST {{url_dev}}/v1/api/shop/signUp
@@ -56,16 +56,15 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "New Jeans",
-    "product_desc": "High-quality denim jeans",
-    "product_thumb": "Thumb-Link",
-    "product_price": 50,
+    "product_name": "IPhone 14 64GB",
+    "product_desc": "New Product",
+    "product_thumb": "Thumb-Link-IPhone-14",
+    "product_price": 500,
     "product_quantity": 5,
-    "product_type": "Clothing",
-    "product_shop": "66c9b818ed301b3355940c97",
+    "product_type": "Electronic",
     "product_attributes": {
-        "brand": "_blue",
-        "size": "XL",
-        "material": "Denim"
+        "manufacturer": "Apple",
+        "model": "IPhone 14",
+        "color": "Blue"
     }
 }
