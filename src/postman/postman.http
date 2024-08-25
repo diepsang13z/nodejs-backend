@@ -56,15 +56,15 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "IPhone 14 64GB",
-    "product_desc": "New Product",
-    "product_thumb": "Thumb-Link-IPhone-14",
-    "product_price": 500,
-    "product_quantity": 5,
-    "product_type": "Electronic",
+    "product_name": "Test Clothing",
+    "product_desc": "New Clothing",
+    "product_thumb": "Thumb-Link-Clothing",
+    "product_price": 800,
+    "product_quantity": 7,
+    "product_type": "abc",
     "product_attributes": {
-        "manufacturer": "Apple",
-        "model": "IPhone 14",
-        "color": "Blue"
+        "brand": "Test",
+        "size": "Test",
+        "material": "Test"
     }
 }
