@@ -8,7 +8,7 @@
 
 @refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTgzODYsImV4cCI6MTcyNTIwMzE4Nn0.bfmf4FI4ZlW8Jw0lQIkhJA1lzX12Ntfy2mX0-dj_lf4
 
-### Sign up API
+### Sign Up
 POST {{url_dev}}/v1/api/shop/signUp
 Content-Type: application/json
 x-api-key: {{apiKey}}
@@ -19,7 +19,7 @@ x-api-key: {{apiKey}}
     "password": "123"
 }
 
-### Login API
+### Login
 POST {{url_dev}}/v1/api/shop/login
 Content-Type: application/json
 x-api-key: {{apiKey}}
@@ -29,7 +29,7 @@ x-api-key: {{apiKey}}
     "password": "123"
 }
 
-### Handle refresh token API
+### Handle Refresh Token
 POST {{url_dev}}/v1/api/shop/handleRefreshToken
 Content-Type: application/json
 x-api-key: {{apiKey}}
@@ -40,7 +40,7 @@ x-rtoken-id: {{refreshToken}}
     "refreshToken": "{{refreshToken}}"
 }
 
-### Logout API
+### Logout
 POST {{url_dev}}/v1/api/shop/logout
 Content-Type: application/json
 x-api-key: {{apiKey}}
@@ -48,7 +48,7 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 
-### Create new Product API
+### Create new Product
 POST {{url_dev}}/v1/api/product
 Content-Type: application/json
 x-api-key: {{apiKey}}
@@ -56,15 +56,22 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "Test Furniture",
-    "product_desc": "New Funiture",
-    "product_thumb": "Thumb-Link-Funiture",
-    "product_price": 800,
-    "product_quantity": 7,
-    "product_type": "Furniture",
+    "product_name": "Bang quan bao be co tay",
+    "product_desc": "New Product",
+    "product_thumb": "Thumb-Link-New-Product",
+    "product_price": 1000,
+    "product_quantity": 13,
+    "product_type": "Clothing",
     "product_attributes": {
-        "brand": "Test",
-        "size": "Test",
-        "material": "Test"
+        "brand": "New",
+        "size": "New",
+        "material": "New"
     }
 }
+
+### Get Draft Products for Shop
+GET {{url_dev}}/v1/api/product/drafts/all
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}

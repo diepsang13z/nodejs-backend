@@ -11,4 +11,8 @@ const { verifyAccessToken } = require('../../auth/verify.auth');
 router.use(asyncHandler(verifyAccessToken));
 router.post('', asyncHandler(productController.createProduct));
 
+// Query
+router.get('/drafts/all', asyncHandler(productController.getAllDraftForShop));
+// End Query
+
 module.exports = router;

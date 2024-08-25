@@ -1,6 +1,7 @@
 'use strict';
 
 const { model, Schema } = require('mongoose');
+const slugify = require('slugify');
 
 const DOCUMENT_NAME = {
   product: 'Product',
@@ -16,10 +17,11 @@ const COLLECTION_NAME = {
   funiture: 'Furnitures',
 };
 
+// Base product schema
 const productSchema = new Schema(
   {
     product_name: {
-      type: String,
+      type: String, // word by word
       require: true,
     },
     product_thumb: {
@@ -27,6 +29,7 @@ const productSchema = new Schema(
       require: true,
     },
     product_desc: String,
+    product_slug: String, // word-by-word
     product_price: {
       type: Number,
       require: true,
@@ -48,6 +51,29 @@ const productSchema = new Schema(
       type: Schema.Types.Mixed,
       require: true,
     },
+    product_ratingsAverage: {
+      type: Number,
+      default: 4.5,
+      min: [1, 'Rating must be above 1.0'],
+      max: [5, 'Rating must be above 5.0'],
+      set: (val) => Math.round(val * 10) / 10, // 4.54323 -> 4.5
+    },
+    product_variations: {
+      type: Array,
+      default: [],
+    },
+    isDraft: {
+      type: Boolean,
+      default: true,
+      index: true,
+      select: false, // field not selected when find
+    },
+    isPublished: {
+      type: Boolean,
+      default: false,
+      index: true,
+      select: false, // field not selected when find
+    },
   },
   {
     timestamps: true,
@@ -55,6 +81,13 @@ const productSchema = new Schema(
   },
 );
 
+// Document middleware: runs before .save() and .create() ...
+productSchema.pre('save', function (next) {
+  this.product_slug = slugify(this.product_name, { lower: true });
+  next();
+});
+
+// Different product type schema
 const clothingSchema = new Schema(
   {
     brand: {
