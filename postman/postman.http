@@ -61,15 +61,15 @@ authorization: {{accessToken}}
 
 {
     "product_name": "ao thun tron 100% cotton",
-    "product_desc": "New Product",
-    "product_thumb": "Thumb-Link-New-Product",
-    "product_price": 1000,
+    "product_desc": "chat lieu thoang mat",
+    "product_thumb": "link",
+    "product_price": 50,
     "product_quantity": 13,
     "product_type": "Clothing",
     "product_attributes": {
-        "brand": "New",
-        "size": "New",
-        "material": "New"
+        "brand": "blue",
+        "size": "XL",
+        "material": "cotton"
     }
 }
 
@@ -91,7 +91,7 @@ authorization: {{accessToken}}
 
 
 ### Publish Products for Shop
-PUT {{url_dev}}/v1/api/product/publish/66cbc908935dbc5d5a2fbcae
+PUT {{url_dev}}/v1/api/product/publish/66cca61fd9be830c69551c65
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -121,7 +121,7 @@ authorization: {{accessToken}}
 
 
 ### Get detail Products
-GET {{url_dev}}/v1/api/product/66cbc908935dbc5d5a2fbcae
+GET {{url_dev}}/v1/api/product/66cca61fd9be830c69551c65
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -129,7 +129,7 @@ authorization: {{accessToken}}
 
 
 ### Update Proudct
-PATCH  {{url_dev}}/v1/api/product/66cbc908935dbc5d5a2fbcae
+PATCH  {{url_dev}}/v1/api/product/66cca61fd9be830c69551c65
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -138,7 +138,7 @@ authorization: {{accessToken}}
 {
     "product_type": "Clothing",
     "product_attributes": {
-        "brand": "blue"
+        "brand": "diepsang"
     },
     "product_name": "ao thun tron cao cap 100% cotton",
     "product_quantity": 99

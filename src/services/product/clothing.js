@@ -29,19 +29,22 @@ class Clothing extends Product {
 
     // Process missing data
     params = removeMissingData(params);
-    params = updateNestedObjParser(params);
 
     // Update child product
     if (params.product_attributes) {
+      const attrParams = params.product_attributes;
       await updateProductById({
         productId,
-        payload: params,
+        payload: updateNestedObjParser(attrParams),
         model: clothingModel,
       });
     }
 
     // Update base product
-    const updatedProduct = await super.updateProduct(productId, params);
+    const updatedProduct = await super.updateProduct(
+      productId,
+      updateNestedObjParser(params),
+    );
     return updatedProduct;
   }
 }
