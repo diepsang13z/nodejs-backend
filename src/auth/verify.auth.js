@@ -25,7 +25,7 @@ const verifyAccessToken = async (req, res, next) => {
 
   const keyStore = await KeyTokenService.findByUserId(userId);
   if (!keyStore) {
-    throw new NotFoundError('Not found!');
+    throw new UnauthorizedError('Invalid Request!');
   }
 
   try {
@@ -51,7 +51,7 @@ const verifyRefreshToken = async (req, res, next) => {
 
   const keyStore = await KeyTokenService.findByUserId(userId);
   if (!keyStore) {
-    throw new NotFoundError('Not found!');
+    throw new UnauthorizedError('Invalid Request!');
   }
 
   const refreshToken = req.headers[REFRESHTOKEN];

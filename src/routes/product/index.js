@@ -13,22 +13,34 @@ router.get(
 );
 
 // For Authenticated
-router.use(asyncHandler(verifyAccessToken));
-router.post('', asyncHandler(productController.createProduct));
+router.post(
+  '',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(productController.createProduct),
+);
 
+// Modify
 router.put(
   '/publish/:id',
+  asyncHandler(verifyAccessToken),
   asyncHandler(productController.publishProductForShop),
 );
 router.put(
   '/unpublish/:id',
+  asyncHandler(verifyAccessToken),
   asyncHandler(productController.unPublishProductForShop),
 );
+// End Modify
 
 // Query
-router.get('/drafts', asyncHandler(productController.getDraftProductInShop));
+router.get(
+  '/drafts',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(productController.getDraftProductInShop),
+);
 router.get(
   '/published',
+  asyncHandler(verifyAccessToken),
   asyncHandler(productController.getPublishProductInShop),
 );
 // End Query

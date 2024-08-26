@@ -13,6 +13,7 @@ const {
 // URL Mapping
 router.post('/shop/signup', asyncHandler(accessController.signUp));
 router.post('/shop/login', asyncHandler(accessController.login));
+
 router.post(
   '/shop/handleRefreshToken',
   asyncHandler(verifyRefreshToken),
@@ -20,7 +21,10 @@ router.post(
 );
 
 // For Authenticated
-router.use(asyncHandler(verifyAccessToken));
-router.post('/shop/logout', asyncHandler(accessController.logout));
+router.post(
+  '/shop/logout',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(accessController.logout),
+);
 
 module.exports = router;

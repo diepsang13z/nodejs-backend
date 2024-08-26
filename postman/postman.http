@@ -4,9 +4,9 @@
 
 @clientId=66c9b818ed301b3355940c97
 
-@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTgzODYsImV4cCI6MTcyNDc3MTE4Nn0.Eu5zHyLvadhi75yd4eR-e5suZj3FKC35Dz87qKNt9Jw
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ2MzE1NjgsImV4cCI6MTcyNDgwNDM2OH0.ty45pad6PquojnnbScp7DgfO3VeHeaHOyxzAi51t72g
 
-@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTgzODYsImV4cCI6MTcyNTIwMzE4Nn0.bfmf4FI4ZlW8Jw0lQIkhJA1lzX12Ntfy2mX0-dj_lf4
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ2MzE1NjgsImV4cCI6MTcyNTIzNjM2OH0.EAG72VNnwK6CfJJZ7DNSSB9r-OI86JQ-zT8c6CBsO8s
 
 
 ### Sign Up
@@ -16,7 +16,7 @@ x-api-key: {{apiKey}}
 
 {
     "name": "diepsang",
-    "email": "bluefd@gmail.com",
+    "email": "bluefffd@gmail.com",
     "password": "123"
 }
 
@@ -60,7 +60,7 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "Bang quan bao be co tay",
+    "product_name": "ao thun tron 100% cotton",
     "product_desc": "New Product",
     "product_thumb": "Thumb-Link-New-Product",
     "product_price": 1000,
@@ -83,7 +83,7 @@ authorization: {{accessToken}}
 
 
 ### Publish Products for Shop
-PUT {{url_dev}}/v1/api/product/publish/66cb7fa3c0250403db8e316f
+PUT {{url_dev}}/v1/api/product/publish/66cbc908935dbc5d5a2fbcae
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -107,6 +107,6 @@ authorization: {{accessToken}}
 
 
 ### Get list searhc Products for Shop
-GET {{url_dev}}/v1/api/product/search/bang quan
+GET {{url_dev}}/v1/api/product/search/ao thun
 Content-Type: application/json
 x-api-key: {{apiKey}}
