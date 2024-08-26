@@ -3,7 +3,7 @@
 const { model, Schema } = require('mongoose');
 
 const DOCUMENT_NAME = 'APIKey';
-const COLLECTION_NAME = 'APIKeys';
+const COLLECTION_NAME = 'apikeys';
 
 const keyTokenSchema = new Schema(
   {

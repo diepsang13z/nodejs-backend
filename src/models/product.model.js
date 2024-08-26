@@ -12,10 +12,10 @@ const DOCUMENT_NAME = {
 };
 
 const COLLECTION_NAME = {
-  product: 'Products',
-  clothing: 'Clothings',
-  electronic: 'Electronics',
-  funiture: 'Furnitures',
+  product: 'products',
+  clothing: 'clothings',
+  electronic: 'electronics',
+  funiture: 'furnitures',
 };
 
 // Base product schema

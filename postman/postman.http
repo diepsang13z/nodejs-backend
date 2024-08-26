@@ -1,12 +1,12 @@
 @url_dev=http://localhost:8000
 
-@apiKey=529ba547a4b136661f869a7f46fdd470f77d21e723ed08ad46e63013e34f07fac33e0e86751973e2c1abe04d5a3e132857b022e5385c205ad24951e0bfbbf513
+@apiKey=887ee8823896d9dbadafc619654e5dafc424550b1b960af3c878de946527fed63381698878c6f05766ee318405d53ebd7100e6929975a8a2c23e1d19eb045331
 
-@clientId=66c9b818ed301b3355940c97
+@clientId=66ccd23252e3f5979d31b52c
 
-@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ2MzE1NjgsImV4cCI6MTcyNDgwNDM2OH0.ty45pad6PquojnnbScp7DgfO3VeHeaHOyxzAi51t72g
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNjZDIzMjUyZTNmNTk3OWQzMWI1MmMiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0Njk5MTg2LCJleHAiOjE3MjQ4NzE5ODZ9.hUPZTMH-mi1q3DGdH0yN5hwndTXL3oojEjkQlfb2ooc
 
-@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmM5YjgxOGVkMzAxYjMzNTU5NDBjOTciLCJlbWFpbCI6ImJsdWUwNUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ2MzE1NjgsImV4cCI6MTcyNTIzNjM2OH0.EAG72VNnwK6CfJJZ7DNSSB9r-OI86JQ-zT8c6CBsO8s
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNjZDIzMjUyZTNmNTk3OWQzMWI1MmMiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0Njk5MTg2LCJleHAiOjE3MjUzMDM5ODZ9.1BlQ5JfBrTMG8o9jxOQth6b_FWWz7s4SqzqFpSwJBcs
 
 
 ### Sign Up
@@ -16,7 +16,7 @@ x-api-key: {{apiKey}}
 
 {
     "name": "diepsang",
-    "email": "bluefffd@gmail.com",
+    "email": "blue@gmail.com",
     "password": "123"
 }
 
@@ -60,11 +60,11 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "ao polo",
-    "product_desc": "thanh lich",
+    "product_name": "ao thun tron",
+    "product_desc": "thoang mat",
     "product_thumb": "link",
-    "product_price": 199,
-    "product_quantity": 230,
+    "product_price": 187,
+    "product_quantity": 200,
     "product_type": "Clothing",
     "product_attributes": {
         "brand": "blue",
@@ -91,7 +91,7 @@ authorization: {{accessToken}}
 
 
 ### Publish Products for Shop
-PUT {{url_dev}}/v1/api/product/publish/66cca61fd9be830c69551c65
+PUT {{url_dev}}/v1/api/product/publish/66ccd2dc52e3f5979d31b543
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -121,7 +121,7 @@ authorization: {{accessToken}}
 
 
 ### Get detail Products
-GET {{url_dev}}/v1/api/product/66cca61fd9be830c69551c65
+GET {{url_dev}}/v1/api/product/66ccd29452e3f5979d31b535
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -129,7 +129,7 @@ authorization: {{accessToken}}
 
 
 ### Update Proudct
-PATCH  {{url_dev}}/v1/api/product/66cca61fd9be830c69551c65
+PATCH  {{url_dev}}/v1/api/product/66ccd2dc52e3f5979d31b543
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -143,20 +143,4 @@ authorization: {{accessToken}}
     "product_name": "ao thun tron cao cap 100% cotton",
     "product_quantity": 99
 }
-
-# {
-#     "product_type": "Clothing",
-#     "product_attributes": {
-#         "brand": "gem",
-#         "size": "XL",
-#         "material": "Cotton"
-#     },
-#     "product_name": "ao thun tron cao cap 100% cotton",
-#     "product_desc": "chat lieu thoang mat",
-#     "product_quantity": 99
-# }
-
-
-
-
 
