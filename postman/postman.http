@@ -126,3 +126,37 @@ Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
+
+
+### Update Proudct
+PATCH  {{url_dev}}/v1/api/product/66cbc908935dbc5d5a2fbcae
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "product_type": "Clothing",
+    "product_attributes": {
+        "brand": "blue"
+    },
+    "product_name": "ao thun tron cao cap 100% cotton",
+    "product_quantity": 99
+}
+
+# {
+#     "product_type": "Clothing",
+#     "product_attributes": {
+#         "brand": "gem",
+#         "size": "XL",
+#         "material": "Cotton"
+#     },
+#     "product_name": "ao thun tron cao cap 100% cotton",
+#     "product_desc": "chat lieu thoang mat",
+#     "product_quantity": 99
+# }
+
+
+
+
+

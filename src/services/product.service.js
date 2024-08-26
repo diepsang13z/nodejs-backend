@@ -28,6 +28,14 @@ class ProductFactory {
     return new productClass(payload).createProduct();
   };
 
+  static updateProduct = async (type, productId, payload) => {
+    const productClass = ProductFactory.productRegistry[type];
+    if (!productClass) {
+      throw new BadRequestError(`Invalid Product Type:: ${type}`);
+    }
+    return new productClass(payload).updateProduct(productId);
+  };
+
   // Query
   static findDraftsInShop = async ({ product_shop, limit = 50, page = 1 }) => {
     const query = { product_shop, isDraft: true };
@@ -37,16 +45,6 @@ class ProductFactory {
   static findPublishInShop = async ({ product_shop, limit = 50, page = 1 }) => {
     const query = { product_shop, isPublished: true };
     return await queryProduct({ query, limit, page });
-  };
-  // End Query
-
-  // Modify
-  static publishProductForShop = async ({ product_shop, product_id }) => {
-    return await publishProductForShop({ product_shop, product_id });
-  };
-
-  static unPublishProductForShop = async ({ product_shop, product_id }) => {
-    return await unPublishProductForShop({ product_shop, product_id });
   };
 
   static findProducts = async ({
@@ -67,6 +65,16 @@ class ProductFactory {
   static findDetailProduct = async ({ product_id }) => {
     const unSelect = ['__v', 'product_variations'];
     return await findDetailProduct({ product_id, unSelect });
+  };
+  // End Query
+
+  // Modify
+  static publishProductForShop = async ({ product_shop, product_id }) => {
+    return await publishProductForShop({ product_shop, product_id });
+  };
+
+  static unPublishProductForShop = async ({ product_shop, product_id }) => {
+    return await unPublishProductForShop({ product_shop, product_id });
   };
   // End Modify
 

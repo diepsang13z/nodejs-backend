@@ -20,6 +20,11 @@ router.post(
   asyncHandler(verifyAccessToken),
   asyncHandler(productController.createProduct),
 );
+router.patch(
+  '/:id',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(productController.updateProduct),
+);
 
 // Modify
 router.put(

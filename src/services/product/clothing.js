@@ -3,6 +3,8 @@
 const Product = require('./product');
 
 const { clothing: clothingModel } = require('../../models/product.model');
+const { updateProductById } = require('../../models/repositories/product.repo');
+const { removeMissingData, updateNestedObjParser } = require('../../utils');
 
 class Clothing extends Product {
   async createProduct() {
@@ -20,6 +22,27 @@ class Clothing extends Product {
     }
 
     return newProduct;
+  }
+
+  async updateProduct(productId) {
+    let params = this;
+
+    // Process missing data
+    params = removeMissingData(params);
+    params = updateNestedObjParser(params);
+
+    // Update child product
+    if (params.product_attributes) {
+      await updateProductById({
+        productId,
+        payload: params,
+        model: clothingModel,
+      });
+    }
+
+    // Update base product
+    const updatedProduct = await super.updateProduct(productId, params);
+    return updatedProduct;
   }
 }
 

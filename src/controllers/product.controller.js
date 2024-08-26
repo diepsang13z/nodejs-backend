@@ -47,6 +47,21 @@ class ProductController {
       }),
     }).send(res);
   };
+
+  updateProduct = async (req, res, next) => {
+    const { userId } = req.user;
+    const productId = req.params.id;
+    const type = req.body.product_type;
+    const payload = req.body;
+
+    new OK({
+      message: 'Update Product success!',
+      metadata: await ProductService.updateProduct(type, productId, {
+        ...payload,
+        product_shop: userId,
+      }),
+    }).send(res);
+  };
   // End Modify
 
   // Query
