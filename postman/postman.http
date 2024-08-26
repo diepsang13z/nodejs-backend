@@ -60,11 +60,11 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "ao thun tron 100% cotton",
-    "product_desc": "chat lieu thoang mat",
+    "product_name": "ao polo",
+    "product_desc": "thanh lich",
     "product_thumb": "link",
-    "product_price": 50,
-    "product_quantity": 13,
+    "product_price": 199,
+    "product_quantity": 230,
     "product_type": "Clothing",
     "product_attributes": {
         "brand": "blue",

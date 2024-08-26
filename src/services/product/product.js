@@ -2,6 +2,7 @@
 
 const { product: productModel } = require('../../models/product.model');
 const { updateProductById } = require('../../models/repositories/product.repo');
+const { createInventory } = require('../../models/repositories/inventory.repo');
 
 // Base Product
 class Product {
@@ -26,7 +27,15 @@ class Product {
   }
 
   async createProduct(productId) {
-    return await productModel.create({ ...this, _id: productId });
+    const newProduct = await productModel.create({ ...this, _id: productId });
+    if (newProduct) {
+      await createInventory({
+        productId: newProduct._id,
+        shopId: this.product_shop,
+        stock: this.product_quantity,
+      });
+    }
+    return newProduct;
   }
 
   async updateProduct(productId, payload) {
