@@ -1,12 +1,13 @@
 'use strict';
 
 const { product: productModel } = require('../product.model');
+const { getSelectData, getUnSelectData } = require('../../utils');
 
 const queryProduct = async ({ query, limit, page }) => {
   const skip = (page - 1) * limit;
   const sortBy = { updateAt: -1 };
 
-  const [products, totalProducts] = await Promise.all([
+  const [products, count] = await Promise.all([
     productModel
       .find(query)
       .populate('product_shop', 'name email -_id')
@@ -17,7 +18,7 @@ const queryProduct = async ({ query, limit, page }) => {
       .exec(),
     productModel.countDocuments(query),
   ]);
-  return { products, totalProducts };
+  return { products, count };
 };
 
 const searchProductByUser = async ({ keySearch }) => {
@@ -79,9 +80,37 @@ const unPublishProductForShop = async ({ product_shop, product_id }) => {
   return modifiedCount;
 };
 
+const findProducts = async ({ select, limit, page, sort, filter }) => {
+  const skip = (page - 1) * limit;
+  const sortBy = sort === 'ctime' ? { _id: -1 } : { _id: 1 };
+  const fields = getSelectData(select);
+
+  const [products, count] = await Promise.all([
+    productModel
+      .find(filter)
+      .sort(sortBy)
+      .skip(skip)
+      .limit(limit)
+      .select(fields)
+      .lean(),
+    productModel.countDocuments(filter),
+  ]);
+
+  return { products, count };
+};
+
+const findDetailProduct = async ({ product_id, unSelect }) => {
+  const filter = { _id: product_id, isPublished: true };
+  const fields = getUnSelectData(unSelect);
+  const product = productModel.find(filter).select(fields).lean();
+  return product;
+};
+
 module.exports = {
   queryProduct,
   publishProductForShop,
   unPublishProductForShop,
   searchProductByUser,
+  findProducts,
+  findDetailProduct,
 };

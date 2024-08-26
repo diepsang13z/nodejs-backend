@@ -8,6 +8,8 @@ const {
   publishProductForShop,
   unPublishProductForShop,
   searchProductByUser,
+  findProducts,
+  findDetailProduct,
 } = require('../models/repositories/product.repo');
 
 // Factory pattern
@@ -45,6 +47,26 @@ class ProductFactory {
 
   static unPublishProductForShop = async ({ product_shop, product_id }) => {
     return await unPublishProductForShop({ product_shop, product_id });
+  };
+
+  static findProducts = async ({
+    limit = 50,
+    page = 1,
+    sort = 'ctime',
+    filter = { isPublished: true },
+  }) => {
+    const select = [
+      'product_name',
+      'product_price',
+      'product_quantity',
+      'product_thumb',
+    ];
+    return await findProducts({ select, limit, page, sort, filter });
+  };
+
+  static findDetailProduct = async ({ product_id }) => {
+    const unSelect = ['__v', 'product_variations'];
+    return await findDetailProduct({ product_id, unSelect });
   };
   // End Modify
 

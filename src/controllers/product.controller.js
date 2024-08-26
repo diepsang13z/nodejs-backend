@@ -52,20 +52,21 @@ class ProductController {
   // Query
   getDraftProductInShop = async (req, res, next) => {
     const { userId } = req.user;
-    const page = parseInt(req.query?.page);
+    const page = parseInt(req.query.page) || 1;
 
-    const { products, totalProducts } = await ProductService.findDraftsInShop({
+    const { products, count } = await ProductService.findDraftsInShop({
       product_shop: userId,
       page,
     });
     const { nextPage, prevPage } = calcPage({
-      totalItem: totalProducts,
+      totalItem: count,
       page,
     });
 
     new OK({
       message: 'Get list draft product success!',
       metadata: {
+        count: count,
         page: page,
         next: nextPage,
         prev: prevPage,
@@ -76,20 +77,21 @@ class ProductController {
 
   getPublishProductInShop = async (req, res, next) => {
     const { userId } = req.user;
-    const page = parseInt(req.query?.page);
+    const page = parseInt(req.query.page) || 1;
 
-    const { products, totalProducts } = await ProductService.findPublishInShop({
+    const { products, count } = await ProductService.findPublishInShop({
       product_shop: userId,
       page,
     });
     const { nextPage, prevPage } = calcPage({
-      totalItem: totalProducts,
+      totalItem: count,
       page,
     });
 
     new OK({
       message: 'Get list publised product success!',
       metadata: {
+        count: count,
         page: page,
         next: nextPage,
         prev: prevPage,
@@ -98,6 +100,35 @@ class ProductController {
     }).send(res);
   };
 
+  getProducts = async (req, res, next) => {
+    const page = parseInt(req.query.page) || 1;
+
+    const { products, count } = await ProductService.findProducts({ page });
+    const { nextPage, prevPage } = calcPage({
+      totalItem: count,
+      page,
+    });
+
+    new OK({
+      message: 'Get list product success!',
+      metadata: {
+        count: count,
+        page: page,
+        next: nextPage,
+        prev: prevPage,
+        data: products,
+      },
+    }).send(res);
+  };
+
+  getDetailProduct = async (req, res, next) => {
+    const product_id = req.params.id;
+
+    new OK({
+      message: 'Get list product success!',
+      metadata: await ProductService.findDetailProduct({ product_id }),
+    }).send(res);
+  };
   // End Query
 
   getListSearchProduct = async (req, res, next) => {

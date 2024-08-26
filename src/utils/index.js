@@ -15,7 +15,18 @@ const calcPage = ({ totalItem, currPage = 1, limit = 50 }) => {
   return { nextPage, prevPage };
 };
 
+// Convert Array to Object
+const getSelectData = (select = []) => {
+  return Object.fromEntries(select.map((elem) => [elem, 1]));
+};
+
+const getUnSelectData = (select = []) => {
+  return Object.fromEntries(select.map((elem) => [elem, 0]));
+};
+
 module.exports = {
   getInfoData,
   calcPage,
+  getSelectData,
+  getUnSelectData,
 };

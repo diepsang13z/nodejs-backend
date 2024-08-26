@@ -91,7 +91,7 @@ authorization: {{accessToken}}
 
 
 ### Publish Products for Shop
-PUT {{url_dev}}/v1/api/product/publish/66cb7f56cea9e55b27891d0f
+PUT {{url_dev}}/v1/api/product/publish/66cbc908935dbc5d5a2fbcae
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -99,7 +99,7 @@ authorization: {{accessToken}}
 
 
 ### UnPublish Products for Shop
-PUT {{url_dev}}/v1/api/product/unpublish/66cb7f56cea9e55b27891d0f
+PUT {{url_dev}}/v1/api/product/unpublish/66cbc908935dbc5d5a2fbcae
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -110,3 +110,19 @@ authorization: {{accessToken}}
 GET {{url_dev}}/v1/api/product/search/ao thun
 Content-Type: application/json
 x-api-key: {{apiKey}}
+
+
+### Get list Products
+GET {{url_dev}}/v1/api/product
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Get detail Products
+GET {{url_dev}}/v1/api/product/66cbc908935dbc5d5a2fbcae
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
