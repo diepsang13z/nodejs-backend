@@ -27,14 +27,14 @@ class ProductFactory {
   };
 
   // Query
-  static findDraftsInShop = async ({ product_shop, limit = 50, skip = 0 }) => {
+  static findDraftsInShop = async ({ product_shop, limit = 50, page = 1 }) => {
     const query = { product_shop, isDraft: true };
-    return await queryProduct({ query, limit, skip });
+    return await queryProduct({ query, limit, page });
   };
 
-  static findPublishInShop = async ({ product_shop, limit = 50, skip = 0 }) => {
+  static findPublishInShop = async ({ product_shop, limit = 50, page = 1 }) => {
     const query = { product_shop, isPublished: true };
-    return await queryProduct({ query, limit, skip });
+    return await queryProduct({ query, limit, page });
   };
   // End Query
 

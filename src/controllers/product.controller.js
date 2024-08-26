@@ -2,6 +2,8 @@
 
 const { CREATED, OK } = require('../core/success.response');
 
+const { calcPage } = require('../utils');
+
 const ProductService = require('../services/product.service');
 
 class ProductController {
@@ -50,23 +52,49 @@ class ProductController {
   // Query
   getDraftProductInShop = async (req, res, next) => {
     const { userId } = req.user;
+    const page = parseInt(req.query?.page);
+
+    const { products, totalProducts } = await ProductService.findDraftsInShop({
+      product_shop: userId,
+      page,
+    });
+    const { nextPage, prevPage } = calcPage({
+      totalItem: totalProducts,
+      page,
+    });
 
     new OK({
-      message: 'Get list Product!',
-      metadata: await ProductService.findDraftsInShop({
-        product_shop: userId,
-      }),
+      message: 'Get list draft product success!',
+      metadata: {
+        page: page,
+        next: nextPage,
+        prev: prevPage,
+        data: products,
+      },
     }).send(res);
   };
 
   getPublishProductInShop = async (req, res, next) => {
     const { userId } = req.user;
+    const page = parseInt(req.query?.page);
+
+    const { products, totalProducts } = await ProductService.findPublishInShop({
+      product_shop: userId,
+      page,
+    });
+    const { nextPage, prevPage } = calcPage({
+      totalItem: totalProducts,
+      page,
+    });
 
     new OK({
-      message: 'Get list Product!',
-      metadata: await ProductService.findPublishInShop({
-        product_shop: userId,
-      }),
+      message: 'Get list publised product success!',
+      metadata: {
+        page: page,
+        next: nextPage,
+        prev: prevPage,
+        data: products,
+      },
     }).send(res);
   };
 
