@@ -23,6 +23,10 @@ const discountSchema = new Schema(
       type: Number,
       required: true,
     },
+    discount_max_value: {
+      type: Number,
+      required: true,
+    },
     discount_code: {
       type: String,
       required: true,

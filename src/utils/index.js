@@ -8,10 +8,10 @@ const getInfoData = ({ fields = [], object = {} }) => {
 };
 
 // Cacl total page
-const calcPage = ({ totalItem, currPage = 1, limit = 50 }) => {
-  const totalPage = Math.ceil(totalItem / limit);
-  const nextPage = currPage < totalPage ? page + 1 : null;
-  const prevPage = currPage > 1 ? page - 1 : null;
+const calcPage = ({ count, page = 1, limit = 50 }) => {
+  const totalPage = Math.ceil(count / limit);
+  const nextPage = page < totalPage ? page + 1 : null;
+  const prevPage = page > 1 ? page - 1 : null;
   return { nextPage, prevPage };
 };
 

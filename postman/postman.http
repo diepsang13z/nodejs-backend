@@ -129,7 +129,7 @@ authorization: {{accessToken}}
 
 
 ### Update Proudct
-PATCH  {{url_dev}}/v1/api/product/66ccd2dc52e3f5979d31b543
+PATCH  {{url_dev}}/v1/api/product/66ccd29452e3f5979d31b535
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -137,10 +137,69 @@ authorization: {{accessToken}}
 
 {
     "product_type": "Clothing",
-    "product_attributes": {
-        "brand": "diepsang"
-    },
-    "product_name": "ao thun tron cao cap 100% cotton",
-    "product_quantity": 99
+    "product_price": 199
 }
 
+### Create Discount
+POST {{url_dev}}/v1/api/discount
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "code": "SHOP-12344",
+    "name": "Test",
+    "desc": "Test create discount",
+    "type": "percentage",
+    "value": 30000,
+    "max_value": 30000,
+    "min_order_value": 200000,
+    "shopId": "66ccd23252e3f5979d31b52c",
+    "max_uses": 100,
+    "uses_count": 0,
+    "users_used": [],
+    "max_uses_per_user": 1,
+    "is_active": true,
+    "applies_to": "specific",
+    "product_ids": ["66ccd29452e3f5979d31b535", "66ccd2dc52e3f5979d31b543"],
+    "start_date": "2024-08-27 09:00:00",
+    "end_date": "2024-08-30 09:00:00"
+}
+
+
+### Get Products of Discount
+GET {{url_dev}}/v1/api/discount/product?code=SHOP-123&limit=50&page=1
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Get Products in Shop
+GET {{url_dev}}/v1/api/discount/66ccd23252e3f5979d31b52c?limit=50&page=1
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Get Discount Amount
+POST {{url_dev}}/v1/api/discount/amount
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "code": "SHOP-123",
+    "shopId": "66ccd23252e3f5979d31b52c",
+    "userId": "66ccd23252e3f5979d31b52c",
+    "products": [
+        {
+            "id": "66ccd29452e3f5979d31b535",
+            "quantity": 20,
+            "price": 1200
+        }
+    ]
+}

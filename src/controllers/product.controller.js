@@ -73,10 +73,7 @@ class ProductController {
       product_shop: userId,
       page,
     });
-    const { nextPage, prevPage } = calcPage({
-      totalItem: count,
-      page,
-    });
+    const { nextPage, prevPage } = calcPage({ count, page });
 
     new OK({
       message: 'Get list draft product success!',
@@ -98,10 +95,7 @@ class ProductController {
       product_shop: userId,
       page,
     });
-    const { nextPage, prevPage } = calcPage({
-      totalItem: count,
-      page,
-    });
+    const { nextPage, prevPage } = calcPage({ count, page });
 
     new OK({
       message: 'Get list publised product success!',
@@ -119,10 +113,7 @@ class ProductController {
     const page = parseInt(req.query.page) || 1;
 
     const { products, count } = await ProductService.findProducts({ page });
-    const { nextPage, prevPage } = calcPage({
-      totalItem: count,
-      page,
-    });
+    const { nextPage, prevPage } = calcPage({ count, page });
 
     new OK({
       message: 'Get list product success!',
