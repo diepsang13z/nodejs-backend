@@ -203,3 +203,45 @@ authorization: {{accessToken}}
         }
     ]
 }
+
+
+### Add a Product to Cart
+POST {{url_dev}}/v1/api/cart
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "productId": "66ccd29452e3f5979d31b535",
+    "quantity": 2
+}
+
+
+### Get Cart
+GET {{url_dev}}/v1/api/cart
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Delete a Product from Cart
+DELETE {{url_dev}}/v1/api/cart/66ccd29452e3f5979d31b535
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Update Cart
+POST {{url_dev}}/v1/api/cart/update
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "productId": "66ccd29452e3f5979d31b535",
+    "quantity": "6"
+}

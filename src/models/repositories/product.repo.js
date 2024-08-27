@@ -118,6 +118,17 @@ const updateProductById = async ({
   return await model.findOneAndUpdate(filter, payload, { new: isNew });
 };
 
+const findProductById = async (id) => {
+  return await productModel.findOne({ _id: id }).lean();
+};
+
+const selectProductById = async (id, select) => {
+  const filter = { _id: id };
+  const fields = getSelectData(select);
+  const product = productModel.findOne(filter).select(fields).lean();
+  return product;
+};
+
 module.exports = {
   queryProduct,
   publishProductForShop,
@@ -126,4 +137,6 @@ module.exports = {
   findProducts,
   findDetailProduct,
   updateProductById,
+  findProductById,
+  selectProductById,
 };
