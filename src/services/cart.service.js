@@ -6,7 +6,7 @@ const {
   createUserCart,
   updateUserCartQuantity,
   deleteProductFromCart,
-  findUserCart,
+  findCartByUserId,
 } = require('../models/repositories/cart.repo');
 const {
   findProductById,
@@ -109,7 +109,7 @@ class CartService {
   };
 
   static findUserCart = async ({ userId }) => {
-    return await findUserCart({ userId });
+    return await findCartByUserId({ userId });
   };
 }
 

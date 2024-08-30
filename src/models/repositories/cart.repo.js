@@ -57,10 +57,19 @@ const deleteProductFromCart = async ({ userId, productId }) => {
   return deletedCart;
 };
 
-const findUserCart = async ({ userId }) => {
+const findCartByUserId = async ({ userId }) => {
   return await cartModel
     .findOne({
       cart_userId: userId,
+    })
+    .lean();
+};
+
+const findCartById = async (id) => {
+  return await cartModel
+    .findOne({
+      _id: id,
+      cart_state: 'active',
     })
     .lean();
 };
@@ -69,5 +78,6 @@ module.exports = {
   createUserCart,
   updateUserCartQuantity,
   deleteProductFromCart,
-  findUserCart,
+  findCartByUserId,
+  findCartById,
 };

@@ -4,7 +4,6 @@ const JWT = require('jsonwebtoken');
 
 const {
   UnauthorizedError,
-  NotFoundError,
   InternalServerError,
 } = require('../core/error.response');
 

@@ -1,6 +1,5 @@
 'use strict';
 
-const { InternalServerError } = require('../core/error.response');
 const keyTokenModel = require('../models/keyToken.model');
 
 class KeyTokenService {

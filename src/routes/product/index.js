@@ -7,6 +7,19 @@ const { asyncHandler } = require('../../helpers/handler.helper');
 const productController = require('../../controllers/product.controller');
 const { verifyAccessToken } = require('../../auth/verify.auth');
 
+// Query
+router.get(
+  '/drafts',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(productController.getDraftProductInShop),
+);
+router.get(
+  '/published',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(productController.getPublishProductInShop),
+);
+// End Query
+
 router.get(
   '/search/:keySearch',
   asyncHandler(productController.getListSearchProduct),
@@ -38,18 +51,5 @@ router.put(
   asyncHandler(productController.unPublishProductForShop),
 );
 // End Modify
-
-// Query
-router.get(
-  '/drafts',
-  asyncHandler(verifyAccessToken),
-  asyncHandler(productController.getDraftProductInShop),
-);
-router.get(
-  '/published',
-  asyncHandler(verifyAccessToken),
-  asyncHandler(productController.getPublishProductInShop),
-);
-// End Query
 
 module.exports = router;

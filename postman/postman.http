@@ -1,12 +1,18 @@
 @url_dev=http://localhost:8000
 
-@apiKey=887ee8823896d9dbadafc619654e5dafc424550b1b960af3c878de946527fed63381698878c6f05766ee318405d53ebd7100e6929975a8a2c23e1d19eb045331
+@apiKey=411d465245c48ec89a965a7f951699d2a9497ee74971539ea621f112fb90c56c69fecbdcd0897bb7585a128292c0dd0704371d2299baec86b925b6d032dce518
 
-@clientId=66ccd23252e3f5979d31b52c
+@clientId=66d21aa17643f907e7cf1738
 
-@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNjZDIzMjUyZTNmNTk3OWQzMWI1MmMiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0Njk5MTg2LCJleHAiOjE3MjQ4NzE5ODZ9.hUPZTMH-mi1q3DGdH0yN5hwndTXL3oojEjkQlfb2ooc
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyMWFhMTc2NDNmOTA3ZTdjZjE3MzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI1MDQ1NDE5LCJleHAiOjE3MjUyMTgyMTl9.SLh9A39mdlU4XAFLSRuXik_IUMV6iDTEnXV4q1sK9p8
 
-@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNjZDIzMjUyZTNmNTk3OWQzMWI1MmMiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI0Njk5MTg2LCJleHAiOjE3MjUzMDM5ODZ9.1BlQ5JfBrTMG8o9jxOQth6b_FWWz7s4SqzqFpSwJBcs
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyMWFhMTc2NDNmOTA3ZTdjZjE3MzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI1MDQ1NDE5LCJleHAiOjE3MjU2NTAyMTl9.2OXOCtmeh3Tave4sT1c8OYqnFeyHjTu6ZFq9xRLv6Tk
+
+
+### Create API Key
+POST {{url_dev}}/v1/api/key
+Content-Type: application/json
+x-api-key: {{apiKey}}
 
 
 ### Sign Up
@@ -27,7 +33,7 @@ Content-Type: application/json
 x-api-key: {{apiKey}}
 
 {
-    "email": "blue05@gmail.com",
+    "email": "blue@gmail.com",
     "password": "123"
 }
 
@@ -60,16 +66,16 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "ao thun tron",
-    "product_desc": "thoang mat",
+    "product_name": "bang quan co tay",
+    "product_desc": "the thao",
     "product_thumb": "link",
-    "product_price": 187,
-    "product_quantity": 200,
+    "product_price": 50,
+    "product_quantity": 320,
     "product_type": "Clothing",
     "product_attributes": {
         "brand": "blue",
-        "size": "XL",
-        "material": "cotton"
+        "size": "freesize",
+        "material": "polyester"
     }
 }
 
@@ -91,7 +97,7 @@ authorization: {{accessToken}}
 
 
 ### Publish Products for Shop
-PUT {{url_dev}}/v1/api/product/publish/66ccd2dc52e3f5979d31b543
+PUT {{url_dev}}/v1/api/product/publish/66d21b6b7643f907e7cf1756
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -107,7 +113,7 @@ authorization: {{accessToken}}
 
 
 ### Get list searhc Products for Shop
-GET {{url_dev}}/v1/api/product/search/ao thun
+GET {{url_dev}}/v1/api/product/search/bang
 Content-Type: application/json
 x-api-key: {{apiKey}}
 
@@ -121,7 +127,7 @@ authorization: {{accessToken}}
 
 
 ### Get detail Products
-GET {{url_dev}}/v1/api/product/66ccd29452e3f5979d31b535
+GET {{url_dev}}/v1/api/product/66d21b6b7643f907e7cf1756
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -148,23 +154,23 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "code": "SHOP-12344",
-    "name": "Test",
-    "desc": "Test create discount",
+    "code": "AO-THUN-123",
+    "name": "Ao thun 10",
+    "desc": "Giam gia ao thung",
     "type": "percentage",
-    "value": 30000,
+    "value": 10,
     "max_value": 30000,
-    "min_order_value": 200000,
-    "shopId": "66ccd23252e3f5979d31b52c",
+    "min_order_value": 2000,
+    "shopId": "66d21aa17643f907e7cf1738",
     "max_uses": 100,
     "uses_count": 0,
     "users_used": [],
     "max_uses_per_user": 1,
     "is_active": true,
     "applies_to": "specific",
-    "product_ids": ["66ccd29452e3f5979d31b535", "66ccd2dc52e3f5979d31b543"],
-    "start_date": "2024-08-27 09:00:00",
-    "end_date": "2024-08-30 09:00:00"
+    "product_ids": ["66d21b207643f907e7cf174e", "66d21b027643f907e7cf1746"],
+    "start_date": "2024-08-30 09:00:00",
+    "end_date": "2024-09-02 09:00:00"
 }
 
 
@@ -192,14 +198,14 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "code": "SHOP-123",
-    "shopId": "66ccd23252e3f5979d31b52c",
-    "userId": "66ccd23252e3f5979d31b52c",
+    "code": "AO-THUN-123",
+    "shopId": "66d21aa17643f907e7cf1738",
+    "userId": "66d21aa17643f907e7cf1738",
     "products": [
         {
-            "id": "66ccd29452e3f5979d31b535",
+            "id": "66d21b207643f907e7cf174e",
             "quantity": 20,
-            "price": 1200
+            "price": 230
         }
     ]
 }
@@ -213,7 +219,7 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "productId": "66ccd29452e3f5979d31b535",
+    "productId": "66d21b6b7643f907e7cf1756",
     "quantity": 2
 }
 
@@ -227,7 +233,7 @@ authorization: {{accessToken}}
 
 
 ### Delete a Product from Cart
-DELETE {{url_dev}}/v1/api/cart/66ccd29452e3f5979d31b535
+DELETE {{url_dev}}/v1/api/cart/:id
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
@@ -244,4 +250,36 @@ authorization: {{accessToken}}
 {
     "productId": "66ccd29452e3f5979d31b535",
     "quantity": "6"
+}
+
+
+### Review Checkout
+POST {{url_dev}}/v1/api/checkout/review
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "cartId": "66d21fd0a4947466ca7bbf44",
+    "order": [
+        {
+            "shopId": "66d21aa17643f907e7cf1738",
+            "discountCodes": ["AO-THUN-123"],
+            "products": [
+                {
+                    "id": "66d21b207643f907e7cf174e",
+                    "quantity": 8
+                },
+                {
+                    "id": "66d21b027643f907e7cf1746",
+                    "quantity": 3
+                },
+                {
+                    "id": "66d21b6b7643f907e7cf1756",
+                    "quantity": 2
+                }
+            ]
+        }
+    ]
 }
