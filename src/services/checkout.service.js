@@ -1,10 +1,13 @@
 'use strict';
 
 const { BadRequestError } = require('../core/error.response');
+
+const orderModel = require('../models/order.model');
 const { findCartById } = require('../models/repositories/cart.repo');
 const { selectProductById } = require('../models/repositories/product.repo');
 
 const DiscountService = require('./discount.service');
+const { acquired, relaeseLock } = require('./redis.service');
 
 class CheckoutService {
   static reviewCheckout = async ({ userId, cartId, order = [] }) => {
@@ -15,7 +18,7 @@ class CheckoutService {
 
     const checkoutOrder = {
         totalProductPrice: 0,
-        freeShip: 0,
+        shipping: 0,
         totalDiscount: 0,
         totalCheckout: 0,
       },
@@ -92,6 +95,66 @@ class CheckoutService {
       checkoutOrder,
     };
   };
+
+  static orderByUser = async ({
+    cartId,
+    order = [],
+    userId,
+    userAddress = {},
+    userPayment = {},
+  }) => {
+    const { detailOrder, checkoutOrder } = await CheckoutService.reviewCheckout(
+      { userId, cartId, order },
+    );
+
+    const products = detailOrder.flatMap((order) => {
+      return order.product;
+    });
+    console.log(`[FlatMap Order]::`, products);
+
+    const acquiredProduct = [];
+
+    for (const item of products) {
+      const { id: prodcutId, quantity } = item;
+
+      const keyLock = await acquired({ cartId, prodcutId, quantity });
+      acquiredProduct.push(keyLock ? true : false);
+
+      if (keyLock) {
+        relaeseLock(keyLock);
+      }
+    }
+
+    if (acquiredProduct.include(false)) {
+      throw new BadRequestError(
+        'Some products have been updated. Pls return to cart!',
+      );
+    }
+
+    const newOrder = await orderModel.create({
+      order_userId: userId,
+      order_checkout: checkoutOrder,
+      order_shipping: userAddress,
+      order_payment: userPayment,
+      order_products: products,
+    });
+
+    if (newOrder) {
+    }
+
+    return {
+      userId,
+      userAddress,
+      userPayment,
+      newOrder,
+    };
+  };
+
+  static findOrderByUser = async () => {};
+  static cancelOrderByUser = async () => {};
+
+  static updateOrderStatusByShop = async () => {};
+  static updateOrderStatusByUser = async () => {};
 }
 
 module.exports = CheckoutService;

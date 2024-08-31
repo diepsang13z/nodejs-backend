@@ -1,6 +1,6 @@
 'use strict';
 
-const { OK } = require('../core/success.response');
+const { CREATED, OK } = require('../core/success.response');
 
 const CheckoutService = require('../services/checkout.service');
 
@@ -14,6 +14,17 @@ class CheckoutController {
       metadata: await CheckoutService.reviewCheckout({
         ...payload,
         userId,
+      }),
+    }).send(res);
+  };
+
+  order = async (req, res, next) => {
+    const payload = req.body;
+
+    new CREATED({
+      message: 'Order checkout!',
+      metadata: await CheckoutService.orderByUser({
+        ...payload,
       }),
     }).send(res);
   };

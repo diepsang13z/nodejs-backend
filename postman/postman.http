@@ -283,3 +283,37 @@ authorization: {{accessToken}}
         }
     ]
 }
+
+
+### Order
+POST {{url_dev}}/v1/api/checkout/order
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+{
+    "cartId": "66d21fd0a4947466ca7bbf44",
+    "order": [
+        {
+            "shopId": "66d21aa17643f907e7cf1738",
+            "discountCodes": ["AO-THUN-123"],
+            "products": [
+                {
+                    "id": "66d21b207643f907e7cf174e",
+                    "quantity": 8
+                },
+                {
+                    "id": "66d21b027643f907e7cf1746",
+                    "quantity": 3
+                },
+                {
+                    "id": "66d21b6b7643f907e7cf1756",
+                    "quantity": 2
+                }
+            ]
+        }
+    ],
+    "userAddress": "",
+    "userPayment": ""
+}

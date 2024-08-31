@@ -11,6 +11,7 @@ const productRouter = require('./product');
 const discountRouter = require('./discount');
 const cartRouter = require('./cart');
 const checkoutRouter = require('./checkout');
+const inventoryRouter = require('./inventory');
 
 router.use('/v1/api/key', apikeyRouter);
 
@@ -19,6 +20,7 @@ router.use(checkAPIKey);
 router.use(checkPermission('0000'));
 
 // Router Mapping
+router.use('/v1/api/inventory', inventoryRouter);
 router.use('/v1/api/checkout', checkoutRouter);
 router.use('/v1/api/discount', discountRouter);
 router.use('/v1/api/cart', cartRouter);
