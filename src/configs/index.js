@@ -7,6 +7,9 @@ const dev = {
   db: {
     url: process.env.DEV_MONGODB_URL || '',
   },
+  redis: {
+    url: process.env.DEV_REDIS_URL || 'redis://localhost:6379',
+  },
 };
 
 const test = {
@@ -16,6 +19,9 @@ const test = {
   db: {
     url: process.env.TEST_MONGODB_URL || '',
   },
+  redis: {
+    url: process.env.TEST_REDIS_URL || 'redis://localhost:6379',
+  },
 };
 
 const prod = {
@@ -24,6 +30,9 @@ const prod = {
   },
   db: {
     url: process.env.PROD_MONGODB_URL || '',
+  },
+  redis: {
+    url: process.env.PROD_REDIS_URL || 'redis://localhost:6379',
   },
 };
 

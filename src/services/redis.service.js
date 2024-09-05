@@ -1,23 +1,20 @@
 'use strict';
 
 const redis = require('redis');
-const util = require('util');
+const { promisify } = require('util');
+
+const {
+  redis: { url: redisURL },
+} = require('../configs');
 
 const {
   reservationInventory,
 } = require('../models/repositories/inventory.repo');
 
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({ url: redisURL });
 
-if (
-  typeof redisClient.pexpire === 'function' &&
-  typeof redisClient.setnx === 'function'
-) {
-  const pexpire = util.promisify(redisClient.pexpire).bind(redisClient);
-  const setnxAsync = util.promisify(redisClient.setnx).bind(redisClient);
-} else {
-  console.error('Redis client methods are not available');
-}
+const pexpire = promisify(redisClient.pExpire).bind(redisClient);
+const setnxAsync = promisify(redisClient.setEx).bind(redisClient);
 
 const acquired = async (cartId, prodcutId, quantity) => {
   const key = `lock_v2024_${prodcutId}`;
