@@ -121,6 +121,64 @@ class CommentService {
 
     return comments;
   };
+
+  static deleteComment = async ({ commentId }) => {
+    const comment = await CommentModel.findById(commentId);
+
+    if (!comment) {
+      throw new NotFoundError('Comment ID not found!');
+    }
+
+    try {
+      // Delete child comments
+      const productId = comment.comment_productId;
+      const leftValue = comment.comment_left;
+      const rightValue = comment.comment_right;
+
+      await CommentModel.deleteMany({
+        comment_productId: productId,
+        comment_left: {
+          $gte: leftValue,
+          $lte: rightValue,
+        },
+      });
+
+      // Update remaining comments's width
+      const width = rightValue - leftValue + 1;
+
+      await CommentModel.updateMany(
+        {
+          comment_productId: productId,
+          comment_left: {
+            $gt: leftValue,
+          },
+        },
+        {
+          $inc: {
+            comment_left: -width,
+          },
+        },
+      );
+
+      await CommentModel.updateMany(
+        {
+          comment_productId: productId,
+          comment_right: {
+            $gt: rightValue,
+          },
+        },
+        {
+          $inc: {
+            comment_right: -width,
+          },
+        },
+      );
+
+      return true;
+    } catch {
+      return false;
+    }
+  };
 }
 
 module.exports = CommentService;

@@ -327,21 +327,36 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 # {
-#     "userId": "888",
+#     "userId": "12345",
 #     "productId": "66d21b207643f907e7cf174e",
-#     "content": "hang giao nhanh"
+#     "content": "giao hang nhanh"
 # }
 
 {
-    "userId": "999",
+    "userId": "8273",
     "productId": "66d21b207643f907e7cf174e",
-    "content": "tam",
-    "parentCommentId": "66da46504984c0fb6d0f71fa"
+    "content": "shop cam on",
+    "parentCommentId": "66da58b5de7167af44d10b15"
 }
 
+# {
+#     "userId": "777",
+#     "productId": "66d21b207643f907e7cf174e",
+#     "content": "tam on",
+#     "parentCommentId": "66da587dde7167af44d10b03"
+# }
 
-### Get Comments
-GET {{url_dev}}/v1/api/comment/66d21b207643f907e7cf174e?parentId=66da46504984c0fb6d0f71fa
+
+### Get Comments with Product
+GET {{url_dev}}/v1/api/comment/product/66d21b207643f907e7cf174e
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+
+### Delete Comment
+DELETE  {{url_dev}}/v1/api/comment/66da588cde7167af44d10b08
 Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}

@@ -50,7 +50,26 @@ class CREATED extends SuccessResponse {
   }
 }
 
+class NO_CONTENT extends SuccessResponse {
+  constructor({
+    message,
+    statusCode = StatusCodes.NO_CONTENT,
+    reasonStatusCode = ReasonPhrases.NO_CONTENT,
+    metadata,
+    options,
+  }) {
+    super({
+      message,
+      statusCode,
+      reasonStatusCode,
+      metadata,
+    });
+    this.options = options;
+  }
+}
+
 module.exports = {
   OK,
   CREATED,
+  NO_CONTENT,
 };

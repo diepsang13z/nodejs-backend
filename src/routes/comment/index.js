@@ -15,8 +15,14 @@ router.post(
   asyncHandler(commentController.createComment),
 );
 
+router.delete(
+  '/:commentId',
+  asyncHandler(verifyAccessToken),
+  asyncHandler(commentController.deleteComment),
+);
+
 router.get(
-  '/:productId',
+  '/product/:productId',
   asyncHandler(verifyAccessToken),
   asyncHandler(commentController.getCommentByParentId),
 );
