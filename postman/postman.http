@@ -361,3 +361,11 @@ Content-Type: application/json
 x-api-key: {{apiKey}}
 x-client-id: {{clientId}}
 authorization: {{accessToken}}
+
+
+### Get Notification by User ID
+GET  {{url_dev}}/v1/api/notification/123
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
