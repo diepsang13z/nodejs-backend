@@ -4,9 +4,9 @@
 
 @clientId=66d21aa17643f907e7cf1738
 
-@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyMWFhMTc2NDNmOTA3ZTdjZjE3MzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI1MDQ1NDE5LCJleHAiOjE3MjUyMTgyMTl9.SLh9A39mdlU4XAFLSRuXik_IUMV6iDTEnXV4q1sK9p8
+@accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyMWFhMTc2NDNmOTA3ZTdjZjE3MzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI1NTc5MzY4LCJleHAiOjE3MjU3NTIxNjh9.2ggVsyEfVsHjgdbPZdPImnnI1Yok6hkQy-TmTWKfb7I
 
-@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyMWFhMTc2NDNmOTA3ZTdjZjE3MzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI1MDQ1NDE5LCJleHAiOjE3MjU2NTAyMTl9.2OXOCtmeh3Tave4sT1c8OYqnFeyHjTu6ZFq9xRLv6Tk
+@refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQyMWFhMTc2NDNmOTA3ZTdjZjE3MzgiLCJlbWFpbCI6ImJsdWVAZ21haWwuY29tIiwiaWF0IjoxNzI1NTc5MzY4LCJleHAiOjE3MjYxODQxNjh9.Czr6g5uoHGh5lAyEYrwHMIyBg0rGQW4FtnkCjZMBEZU
 
 
 ### Create API Key
@@ -317,3 +317,32 @@ authorization: {{accessToken}}
     "userAddress": "",
     "userPayment": ""
 }
+
+
+### Create Comment
+POST {{url_dev}}/v1/api/comment
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
+
+# {
+#     "userId": "888",
+#     "productId": "66d21b207643f907e7cf174e",
+#     "content": "hang giao nhanh"
+# }
+
+{
+    "userId": "999",
+    "productId": "66d21b207643f907e7cf174e",
+    "content": "tam",
+    "parentCommentId": "66da46504984c0fb6d0f71fa"
+}
+
+
+### Get Comments
+GET {{url_dev}}/v1/api/comment/66d21b207643f907e7cf174e?parentId=66da46504984c0fb6d0f71fa
+Content-Type: application/json
+x-api-key: {{apiKey}}
+x-client-id: {{clientId}}
+authorization: {{accessToken}}
