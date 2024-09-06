@@ -3,6 +3,7 @@
 const { product: productModel } = require('../../models/product.model');
 const { updateProductById } = require('../../models/repositories/product.repo');
 const { createInventory } = require('../../models/repositories/inventory.repo');
+const { pushNotiToSys } = require('../notification.service');
 
 // Base Product
 class Product {
@@ -35,6 +36,21 @@ class Product {
         stock: this.product_quantity,
       });
     }
+
+    // Push notification for user when shop add a new product
+    pushNotiToSys({
+      type: 'SHOP-001',
+      senderId: this.product_shop,
+      receiverId: '123',
+      options: {
+        product_type: this.product_type,
+        product_name: this.product_name,
+        product_shop: this.product_shop,
+      },
+    })
+      .then((rs) => console.log(rs))
+      .catch(console.error);
+
     return newProduct;
   }
 

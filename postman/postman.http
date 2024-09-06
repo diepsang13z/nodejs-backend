@@ -66,16 +66,16 @@ x-client-id: {{clientId}}
 authorization: {{accessToken}}
 
 {
-    "product_name": "bang quan co tay",
-    "product_desc": "the thao",
+    "product_name": "IPhone 19 1000GB",
+    "product_desc": "don dau cong nghe",
     "product_thumb": "link",
-    "product_price": 50,
-    "product_quantity": 320,
-    "product_type": "Clothing",
+    "product_price": 999,
+    "product_quantity": 999,
+    "product_type": "Electronic",
     "product_attributes": {
-        "brand": "blue",
-        "size": "freesize",
-        "material": "polyester"
+        "manufacturer": "APSBOF",
+        "model": "Corei999",
+        "color": "Blue"
     }
 }
 
