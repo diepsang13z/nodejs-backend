@@ -1,11 +1,8 @@
 'use strict';
 
 const amqp = require('amqplib');
-const { Buffer } = require('node:buffer');
 
-const message = 'Hello, RabbitMQ';
-
-const runProducer = async () => {
+const runConsumer = async () => {
   const connection = await amqp.connect('amqp://guest:123@localhost');
   const channel = await connection.createChannel();
 
@@ -15,8 +12,13 @@ const runProducer = async () => {
     durable: true,
   });
 
-  channel.sendToQueue(queueName, Buffer.from(message));
-  console.log(`Message sent::`, message);
+  channel.consume(
+    queueName,
+    (message) => {
+      console.log(`Received::`, message.content.toString());
+    },
+    { noAck: true },
+  );
 };
 
-runProducer().catch(console.error);
+runConsumer().catch(console.error);

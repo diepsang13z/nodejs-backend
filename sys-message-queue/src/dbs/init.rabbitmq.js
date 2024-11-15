@@ -1,7 +1,6 @@
 'use strict';
 
 const amqp = require('amqplib');
-const { Buffer } = require('node:buffer');
 
 const connectRabbitMQ = async () => {
   const connection = await amqp.connect('amqp://guest:123@localhost');
@@ -14,24 +13,29 @@ const connectRabbitMQ = async () => {
   return { channel, connection };
 };
 
-const testConnectRabbitMQ = async () => {
+const consumerQueue = async (channel, queueName) => {
   try {
-    const { channel, connection } = await connectRabbitMQ();
-
-    const queue = 'Test-Rabbit-Queue';
-    const message = 'Hello RabbitMQ';
-
-    await channel.assertQueue(queue);
-    await channel.sendToQueue(queue, Buffer.from(message));
-
-    await connection.close();
+    await channel.assertQueue(queueName, { durable: true });
+    console.log(`Waiting for messages...`);
+    channel.consume(
+      queueName,
+      (message) => {
+        console.log(
+          `Receive message ${queueName}::`,
+          message.content.toString(),
+        );
+      },
+      {
+        noAck: true,
+      },
+    );
   } catch (error) {
-    console.error('Error connect to RabbitMQ', error);
+    console.error(`Error publish message to rabbitMQ::`, error);
     throw error;
   }
 };
 
 module.exports = {
   connectRabbitMQ,
-  testConnectRabbitMQ,
+  consumerQueue,
 };
