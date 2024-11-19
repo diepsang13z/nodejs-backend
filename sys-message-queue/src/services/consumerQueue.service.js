@@ -11,6 +11,13 @@ const messageService = {
       console.error(`Error consumerToQueue::`, error);
     }
   },
+
+  consumerToQueueNormal: async (queueName) => {
+    try {
+    } catch (error) {
+      console.error(`Error consumerToQueueNormal::`, error);
+    }
+  },
 };
 
 module.exports = messageService;

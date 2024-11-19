@@ -16,8 +16,14 @@ const runProducer = async () => {
       durable: true,
     });
 
-    channel.sendToQueue(queueName, Buffer.from(message));
+    // channel.sendToQueue(queueName, Buffer.from(message), {
+    //   expiration: '10000', // TTL - Time To Live
+    // });
+    channel.sendToQueue(queueName, Buffer.from(message), {
+      persistent: true,
+    });
     console.log(`Message sent::`, message);
+
     setTimeout(() => {
       connection.close();
       process.exit();

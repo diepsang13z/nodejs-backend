@@ -17,7 +17,9 @@ const runConsumer = async () => {
     (message) => {
       console.log(`Received::`, message.content.toString());
     },
-    { noAck: true },
+    {
+      noAck: true,
+    },
   );
 };
 
