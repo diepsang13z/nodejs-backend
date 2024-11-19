@@ -31,5 +31,4 @@ const receiveNotification = async () => {
   }
 };
 
-const message = process.argv.slice(2).join(' ') || 'Hello Exchange';
-receiveNotification({ message });
+receiveNotification();
