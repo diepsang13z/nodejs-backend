@@ -1,11 +1,23 @@
 'use strict';
 
-const { consumerToQueue } = require('./src/services/consumerQueue.service');
+const {
+  consumerToQueueSuccess,
+  consumerToQueueFailed,
+} = require('./src/services/consumerQueue.service');
 
-const queueName = 'test';
-consumerToQueue(queueName)
+const QUEUE_NAME = 'test';
+
+consumerToQueueSuccess(QUEUE_NAME)
   .then(() => {
-    console.log(`Message consumer started ${queueName}`);
+    console.log(`Message consumerToQueueSuccess started ${QUEUE_NAME}`);
+  })
+  .catch((err) => {
+    console.error(`Message Error: ${err.message}`);
+  });
+
+consumerToQueueFailed(QUEUE_NAME)
+  .then(() => {
+    console.log(`Message consumerToQueueFailed started ${QUEUE_NAME}`);
   })
   .catch((err) => {
     console.error(`Message Error: ${err.message}`);
