@@ -21,13 +21,20 @@ const messageService = {
     try {
       const { channel, connection } = await connectRabbitMQ();
       const notificationQueue = 'notification_queue_process';
-      const timeExpired = 20000;
 
+      // TTL - Time To Live
+      const timeExpired = 20000;
       setTimeout(() => {
         channel.consume(notificationQueue, (message) => {
-          const content = message.content.toString();
-          console.log(`Send notification successfully processed:: ${content}`);
-          channel.ack(message);
+          try {
+            const content = message.content.toString();
+            console.log(
+              `Send notification successfully processed:: ${content}`,
+            );
+            channel.ack(message);
+          } catch (error) {
+            channel.nack(message, false, false); // negative acknowledgement
+          }
         });
       }, timeExpired);
     } catch (error) {
